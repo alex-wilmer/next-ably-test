@@ -18,7 +18,7 @@ export default function handler(
     User.findOne({ username }, (err, user) => {
       if (err) throw err
       if (user)
-        res.json({
+        res.status(400).json({
           success: false,
           message: `User with this username already exists.`,
         })
@@ -39,7 +39,7 @@ export default function handler(
       }
     })
   } else
-    res.json({
+    res.status(400).json({
       success: false,
       message: `Must provide username and password.`,
     })
