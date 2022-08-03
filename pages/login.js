@@ -46,7 +46,7 @@ export default function Login() {
               display: 'block',
             }}
           >
-            4 Digit Pin (Don't forget it!)
+            4 Digit Pin (Remember this!)
           </label>
           <PinInput
             length={4}
