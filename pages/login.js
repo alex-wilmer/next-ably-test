@@ -1,14 +1,15 @@
-import React from 'react';
-import PinInput from 'react-pin-input';
+import { useState } from 'react'
+import PinInput from 'react-pin-input'
 import { useRouter } from 'next/router'
-import auth from '../lib/auth'
-
-let username,
-  password = '';
+import useAuth from '../lib/hooks/useAuth'
 
 export default function Login() {
   const router = useRouter()
   const { nextPathname } = router.query
+  const { signup, login } = useAuth()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
 
   return (
     <div
@@ -36,7 +37,11 @@ export default function Login() {
         >
           StudentID
         </label>
-        <input ref={node => (username = node)} type="text" />
+        <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+        />
         <div>
           <label
             style={{
@@ -51,28 +56,30 @@ export default function Login() {
           <PinInput
             length={4}
             onChange={(value, index) => {
-              password = value;
+              setPassword(value)
             }}
             type="numeric"
             style={{ padding: '10px' }}
             inputStyle={{ borderColor: 'rgb(165, 187, 179)' }}
             inputFocusStyle={{ borderColor: 'blue' }}
-            onComplete={(value, index) => { }}
+            onComplete={(value, index) => {}}
           />
         </div>
         <button
-          // onClick={() => {
-          //   password.length === 4
-          //     ? login({
-          //       type: `login`,
-          //       userInfo: {
-          //         username: username.value,
-          //         password: password,
-          //       },
-          //       nextPathname,
-          //     })
-          //     : alert('Please enter a 4 digit pin.');
-          // }}
+          onClick={async () => {
+            if (password.length !== 4) {
+              setMessage('Please enter a 4 digit pin.')
+            } else {
+              const response = await login({
+                username,
+                password,
+              })
+
+              if (response?.message) {
+                setMessage(response.message)
+              }
+            }
+          }}
           style={{
             marginTop: `0.5rem`,
           }}
@@ -81,8 +88,13 @@ export default function Login() {
         </button>
         <button
           onClick={async () => {
-            const response = await auth.signup({ username: username.value, password })
-            console.log({ response })
+            const response = await signup({
+              username,
+              password,
+            })
+            if (response?.message) {
+              setMessage(response.message)
+            }
           }}
           style={{
             marginTop: `1rem`,
@@ -90,8 +102,8 @@ export default function Login() {
         >
           Sign Up
         </button>
-        {/* {!!message && <div>{message}</div>} */}
+        {!!message && <div>{message}</div>}
       </div>
     </div>
-  );
+  )
 }

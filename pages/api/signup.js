@@ -1,5 +1,3 @@
-// import { searchUser, updateUser } from 'lib/api/user';
-// import { getSession } from 'next-auth/react';
 import User from '../../lib/models/user'
 import crypto from 'crypto'
 import mongoose from 'mongoose'

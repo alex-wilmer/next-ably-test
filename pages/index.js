@@ -3,7 +3,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-const AblyChatComponent = dynamic(() => import('../components/AblyChatComponent'), { ssr: false });
+// const AblyChatComponent = dynamic(() => import('../components/AblyChatComponent'), { ssr: false });
 
 export default function Home() {
   const [loggedIn, setLoggedIn] = useState(true)
@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div
-      className='container'
+      className="container"
       style={{
         height: `100%`,
       }}
