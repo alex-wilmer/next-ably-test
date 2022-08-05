@@ -1,7 +1,8 @@
 // import React, { Component } from 'react'
 // import { API } from '../config'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import useGalleryApi from '../lib/hooks/useGalleryApi'
 
 // export default class Home extends Component {
 //   state = { galleries: [] }
@@ -16,28 +17,19 @@ import Link from 'next/link'
 //     })
 //   }
 
-//   getGalleries = async () => {
-//     let response = await fetch(`${API}/api/galleries`, {
-//       method: `POST`,
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({
-//         token: localStorage.token,
-//         userId: localStorage.userId,
-//         username: localStorage.username,
-//       }),
-//     })
-
-//     let json = await response.json()
-
-//     this.setState({
-//       galleries: json || [],
-//     })
-//   }
-
-//   render() {
-
 export default function Galleries({ admin = true }) {
+  const { getGalleries } = useGalleryApi()
   const [galleries, setGalleries] = useState([])
+
+  useEffect(() => {
+    async function req() {
+      const response = await getGalleries()
+      if (response) setGalleries(response)
+    }
+
+    req()
+  }, [getGalleries])
+
   return (
     <div>
       <div
@@ -66,7 +58,7 @@ export default function Galleries({ admin = true }) {
           </Link>
         )}
 
-        {galleries.map(g => (
+        {galleries.map((g) => (
           <Link href={`/gallery/${g._id}`} key={g._id}>
             <a
               style={{
