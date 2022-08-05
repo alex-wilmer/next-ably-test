@@ -1,10 +1,9 @@
 import { useState } from 'react'
-// import moment from 'moment'
 import Link from 'next/link'
-import TextField from '@mui/material/TextField';
+import TextField from '@mui/material/TextField'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 // import { Link } from 'react-router-dom'
 // import DatePicker from 'material-ui/DatePicker'
 // import TimePicker from 'material-ui/TimePicker'
@@ -14,8 +13,8 @@ let name, password, deadlineDate, deadlineTime
 export default function NewGalleryForm() {
   const [value, setValue] = useState(Date.now())
 
-  const handleChange = newValue => {
-    setValue(newValue);
+  const handleChange = (newValue) => {
+    setValue(newValue)
   }
 
   return (
@@ -34,9 +33,9 @@ export default function NewGalleryForm() {
           flexDirection: `column`,
         }}
       >
-        <input ref={node => (name = node)} placeholder="Name.." type="text" />
+        <input ref={(node) => (name = node)} placeholder="Name.." type="text" />
         <input
-          ref={node => (password = node)}
+          ref={(node) => (password = node)}
           placeholder="Password.."
           type="text"
         />
@@ -49,18 +48,6 @@ export default function NewGalleryForm() {
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
-        {/* <DatePicker
-          onChange={(event, date) => (deadlineDate = date)}
-          hintText="Deadline Date"
-          mode="portrait"
-        />
-        <TimePicker
-          style={{
-            maxHeight: `5rem`,
-          }}
-          onChange={(event, date) => (deadlineTime = date)}
-          hintText="Deadline Time"
-        /> */}
         <div
           style={{
             marginTop: `1.5rem`,
@@ -71,17 +58,17 @@ export default function NewGalleryForm() {
               width: `100%`,
               marginBottom: `1rem`,
             }}
-          // onClick={() => {
-          //   let deadline = moment(deadlineDate)
-          //     .add(moment(deadlineTime).hours(), `hours`)
-          //     .add(moment(deadlineTime).minutes(), `minutes`)
+            // onClick={() => {
+            //   let deadline = moment(deadlineDate)
+            //     .add(moment(deadlineTime).hours(), `hours`)
+            //     .add(moment(deadlineTime).minutes(), `minutes`)
 
-          //   createGallery({
-          //     name: name.value,
-          //     password: password.value,
-          //     submitDeadline: +deadline,
-          //   })
-          // }}
+            //   createGallery({
+            //     name: name.value,
+            //     password: password.value,
+            //     submitDeadline: +deadline,
+            //   })
+            // }}
           >
             Create
           </button>
