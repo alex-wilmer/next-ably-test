@@ -28,7 +28,7 @@ export default function Galleries({ admin = true }) {
     }
 
     req()
-  }, [getGalleries])
+  }, [])
 
   return (
     <div>
