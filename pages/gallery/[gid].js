@@ -19,7 +19,9 @@ export default function Gallery() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [viewingImage, setViewingImage] = useState()
   const [dataUrl, setDataUrl] = useState(null)
+  const [userImage, setUserImage] = useState(null)
   const [imageSize, setImageSize] = useState(null)
+  const [youtubeLink, setYoutubeLink] = useState('')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -43,10 +45,43 @@ export default function Gallery() {
     setColorPickerOpen(false)
   }
 
-  function togglePublic() {
+  async function togglePublic() {
+    let response = await fetch(`/api/galleryTogglePublic`, {
+      method: `POST`,
+      headers: { 'Content-Type': `application/json` },
+      body: JSON.stringify({
+        token: localStorage.token,
+        galleryId: gid,
+      }),
+    }).then((r) => r.json())
+
+    if (response) {
+      setGallery(response)
+    }
+
     // this.props.socket.emit(`ui:togglePublic`, {
     //   _id: this.state.gallery._id,
     // })
+  }
+
+  async function saveToDb({ link, width, height, caption }) {
+    let response = await fetch(`/api/galleryimage`, {
+      method: `POST`,
+      headers: { 'Content-Type': `application/json` },
+      body: JSON.stringify({
+        token: localStorage.token,
+        galleryId: gid,
+        username: localStorage.username,
+        link,
+        caption,
+        width,
+        height,
+      }),
+    })
+
+    let { image } = await response.json()
+    setUserImage(image)
+    setYoutubeLink('')
   }
 
   function uploadFile(event) {
@@ -76,7 +111,7 @@ export default function Gallery() {
 
   async function uploadToImgur({ caption }) {
     let format = (string) => {
-      let [type, ...data] = string.split(',') // eslint-disable-line
+      let [type, ...data] = string.split(',')
       return data.join()
     }
 

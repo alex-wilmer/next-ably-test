@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import PinInput from 'react-pin-input'
 import { useRouter } from 'next/router'
+import Button from '@mui/material/Button'
 import useAuth from '../lib/hooks/useAuth'
 import useChannel from '../lib/hooks/useChannel'
 
@@ -67,7 +68,7 @@ export default function Login() {
             onComplete={(value, index) => {}}
           />
         </div>
-        <button
+        <Button
           onClick={async () => {
             if (password.length !== 4) {
               setMessage('Please enter a 4 digit pin.')
@@ -77,8 +78,11 @@ export default function Login() {
                 password,
               })
 
+              // something went wrong
               if (response?.message) {
                 setMessage(response.message)
+              } else {
+                router.push('/galleries')
               }
             }
           }}
@@ -87,8 +91,8 @@ export default function Login() {
           }}
         >
           Log In
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={async () => {
             const response = await signup({
               username,
@@ -98,6 +102,12 @@ export default function Login() {
               setMessage(response.message)
             } else {
               channel.publish({ name: 'new-signup', data: username })
+              // login user after successful signup
+              await login({
+                username,
+                password,
+              })
+              router.push('/galleries')
             }
           }}
           style={{
@@ -105,7 +115,7 @@ export default function Login() {
           }}
         >
           Sign Up
-        </button>
+        </Button>
         {!!message && <div>{message}</div>}
       </div>
     </div>

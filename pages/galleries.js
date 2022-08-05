@@ -1,21 +1,8 @@
-// import React, { Component } from 'react'
-// import { API } from '../config'
 import { useState, useEffect } from 'react'
+import Head from 'next/head'
 import Link from 'next/link'
 import useGalleryApi from '../lib/hooks/useGalleryApi'
-
-// export default class Home extends Component {
-//   state = { galleries: [] }
-
-//   componentDidMount() {
-//     this.getGalleries()
-
-//     this.props.socket.on(`api:updateGallery`, gallery => {
-//       if (!this.state.galleries.some(x => x._id === gallery._id)) {
-//         this.setState(s => ({ galleries: s.galleries.concat(gallery) }))
-//       }
-//     })
-//   }
+import Header from '../components/Header'
 
 export default function Galleries({ admin = true }) {
   const { getGalleries } = useGalleryApi()
@@ -31,7 +18,19 @@ export default function Galleries({ admin = true }) {
   }, [])
 
   return (
-    <div>
+    <div
+      className="container"
+      style={{
+        height: `100%`,
+      }}
+    >
+      <Head>
+        <title>Rater | Galleries</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Header />
+
       <div
         style={{
           display: `flex`,
