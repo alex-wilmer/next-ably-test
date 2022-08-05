@@ -5,7 +5,6 @@ import runMiddleware from '../../lib/middleware/runMiddleware'
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, verifyToken)
-
   mongoose.connect(process.env.MONGODB_URI)
 
   User.find({}, (err, users) => {
