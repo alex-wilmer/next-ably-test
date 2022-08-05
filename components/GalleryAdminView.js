@@ -1,4 +1,5 @@
 import { TwitterPicker as ColorPicker } from 'react-color'
+import Button from '@mui/material/Button'
 
 function GalleryAdminView({
   gallery,
@@ -20,9 +21,9 @@ function GalleryAdminView({
           alignItems: `center`,
         }}
       >
-        <button onClick={togglePublic}>
+        <Button onClick={togglePublic}>
           {gallery.public ? `Make Private` : `Make Public`}
-        </button>
+        </Button>
       </div>
 
       <div
@@ -68,7 +69,7 @@ function GalleryAdminView({
         />
       </div>
 
-      <button
+      <Button
         onClick={openDeleteModal}
         style={{
           float: `right`,
@@ -78,11 +79,11 @@ function GalleryAdminView({
         }}
       >
         Delete Gallery
-      </button>
+      </Button>
 
-      <button onClick={activateDeadline} style={{ float: `right` }}>
+      <Button onClick={activateDeadline} style={{ float: `right` }}>
         Activate Deadline
-      </button>
+      </Button>
     </div>
   )
 }
