@@ -6,15 +6,15 @@ import DialogTitle from '@mui/material/DialogTitle'
 import useGalleryApi from '../../lib/hooks/useGalleryApi'
 import GalleryAdminView from '../../components/GalleryAdminView'
 import GalleryUserView from '../../components/GalleryUserView'
+import GalleryLogin from '../../components/GalleryLogin'
 import ViewImage from '../../components/ViewImage'
 
 export default function Gallery() {
   const router = useRouter()
   const { gid } = router.query
 
-  const { getGallery } = useGalleryApi()
+  const { getGallery, gallery, needToAuth } = useGalleryApi()
 
-  const [gallery, setGallery] = useState()
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [viewingImage, setViewingImage] = useState()
@@ -28,10 +28,7 @@ export default function Gallery() {
     if (!gid) return
 
     async function req() {
-      const response = await getGallery({ galleryId: gid })
-      if (response) {
-        setGallery(response)
-      }
+      getGallery()
     }
 
     req()
@@ -208,16 +205,24 @@ export default function Gallery() {
 
           {gallery.owner !== localStorage.username && (
             <GalleryUserView
+              gallery={gallery}
               clearDataUrl={() => setDataUrl(null)}
               uploadFile={uploadFile}
               uploadToImgur={uploadToImgur}
               viewImage={viewImage}
-              submitYoutube={submitYoutube}
-              clearYoutubelink={clearYoutubelink}
+              submitYoutube={(link) => setYoutubeLink(link)}
+              clearYoutubelink={() => setYoutubeLink('')}
               saveToDb={saveToDb}
             />
           )}
         </>
+      )}
+
+      {needToAuth && (
+        <GalleryLogin
+          getGallery={getGallery}
+          //  message={message}
+        />
       )}
     </div>
   )

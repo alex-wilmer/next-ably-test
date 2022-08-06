@@ -106,9 +106,7 @@ export default function GalleryUserView({
                 ref={(node) => (youtube = node)}
                 style={{ width: `20rem` }}
               />
-              <button
-                onClick={() => submitYoutube({ youtubeLink: youtube.value })}
-              >
+              <button onClick={() => submitYoutube(youtube.value)}>
                 Submit
               </button>
             </div>
