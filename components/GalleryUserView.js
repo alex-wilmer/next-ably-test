@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 // import ImagesToRate from './ImagesToRate'
 import UploadImage from './UploadImage'
 //import averageCriticalAssessmentScore from '../utils/averageCriticalAssessmentScore'
@@ -51,7 +50,7 @@ export default function GalleryUserView({
                     />
                   )}
                   {userImage.link.includes(`youtube`) || (
-                    <Image
+                    <img // eslint-disable-line
                       alt="userImage"
                       src={userImage.link}
                       style={{

@@ -15,13 +15,12 @@ export default function Gallery() {
   const router = useRouter()
   const { gid } = router.query
 
-  const { getGallery, gallery, needToAuth } = useGalleryApi()
+  const { getGallery, gallery, needToAuth, userImage } = useGalleryApi()
 
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [viewingImage, setViewingImage] = useState()
   const [dataUrl, setDataUrl] = useState(null)
-  const [userImage, setUserImage] = useState(null)
   const [imageSize, setImageSize] = useState(null)
   const [youtubeLink, setYoutubeLink] = useState('')
   const [loading, setLoading] = useState(false)
@@ -64,7 +63,7 @@ export default function Gallery() {
   }
 
   async function saveToDb({ link, width, height, caption }) {
-    let response = await fetch(`/api/galleryimage`, {
+    let response = await fetch(`/api/galleryImage`, {
       method: `POST`,
       headers: { 'Content-Type': `application/json` },
       body: JSON.stringify({
@@ -135,7 +134,7 @@ export default function Gallery() {
     if (data.link) {
       setDataUrl(null)
 
-      this.saveToDb({
+      saveToDb({
         link: data.link,
         width: data.width,
         height: data.height,
@@ -216,6 +215,7 @@ export default function Gallery() {
           {gallery.owner !== localStorage.username && (
             <GalleryUserView
               gallery={gallery}
+              userImage={userImage}
               dataUrl={dataUrl}
               imageSize={imageSize}
               clearDataUrl={() => setDataUrl(null)}
