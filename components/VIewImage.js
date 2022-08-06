@@ -1,6 +1,5 @@
-import React from 'react'
-import StarRating from './StarRating'
 import Image from 'next/image'
+import StarRating from './StarRating'
 
 let feedback
 

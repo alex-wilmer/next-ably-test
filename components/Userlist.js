@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import useChannel from '../lib/hooks/useChannel'
+import useChannel from 'lib/hooks/useChannel'
 
 export default function Userlist() {
   const [users, setUsers] = useState([])

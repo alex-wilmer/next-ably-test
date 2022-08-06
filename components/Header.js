@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import useAuth from '../lib/hooks/useAuth'
+import useAuth from 'lib/hooks/useAuth'
 
 function Header() {
   const { localValues, logout } = useAuth()

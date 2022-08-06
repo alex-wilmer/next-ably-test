@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 let textarea
 
 export default function UploadImage({

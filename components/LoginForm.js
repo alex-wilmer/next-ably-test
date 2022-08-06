@@ -2,8 +2,8 @@ import { useState } from 'react'
 import PinInput from 'react-pin-input'
 import { useRouter } from 'next/router'
 import Button from '@mui/material/Button'
-import useAuth from '../lib/hooks/useAuth'
-import useChannel from '../lib/hooks/useChannel'
+import useAuth from 'lib/hooks/useAuth'
+import useChannel from 'lib/hooks/useChannel'
 
 export default function Login() {
   const router = useRouter()

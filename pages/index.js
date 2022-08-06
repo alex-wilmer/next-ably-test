@@ -1,7 +1,7 @@
-import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import Header from '../components/Header'
+import Head from 'next/head'
+import Header from 'components/Header'
 
 // const AblyChatComponent = dynamic(() => import('../components/AblyChatComponent'), { ssr: false });
 

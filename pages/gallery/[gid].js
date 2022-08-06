@@ -4,12 +4,12 @@ import Head from 'next/head'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
-import Header from '../../components/Header'
-import useGalleryApi from '../../lib/hooks/useGalleryApi'
-import GalleryAdminView from '../../components/GalleryAdminView'
-import GalleryUserView from '../../components/GalleryUserView'
-import GalleryLogin from '../../components/GalleryLogin'
-import ViewImage from '../../components/ViewImage'
+import Header from 'components/Header'
+import useGalleryApi from 'lib/hooks/useGalleryApi'
+import GalleryAdminView from 'components/GalleryAdminView'
+import GalleryUserView from 'components/GalleryUserView'
+import GalleryLogin from 'components/GalleryLogin'
+import ViewImage from 'components/ViewImage'
 
 export default function Gallery() {
   const router = useRouter()
@@ -160,7 +160,7 @@ export default function Gallery() {
   return (
     <div>
       <Head>
-        <title>Rater | {gallery?.name}</title>
+        <title>Rater</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
