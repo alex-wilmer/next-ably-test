@@ -15,6 +15,10 @@ export default async function handler(req, res) {
 
       if (image) {
         image.link = req.body.link
+        image.caption = req.body.caption
+        image.width = req.body.width
+        image.height = req.body.height
+        image.uploadDate = +new Date()
       } else {
         image = {
           link: req.body.link,
@@ -33,6 +37,8 @@ export default async function handler(req, res) {
         ...gallery.images.filter((x) => x.username !== req.body.username),
         image,
       ]
+
+      gallery.markModified('images')
 
       gallery.save((err, g) => {
         console.log(`Updated Gallery`, g)

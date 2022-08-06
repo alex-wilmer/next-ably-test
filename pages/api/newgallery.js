@@ -13,8 +13,6 @@ export default async function handler(req, res) {
     Gallery.findOne({ name }, (err, gallery) => {
       if (err) throw err
 
-      console.log({ gallery })
-
       if (gallery) {
         res
           .status(400)

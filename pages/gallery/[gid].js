@@ -15,7 +15,8 @@ export default function Gallery() {
   const router = useRouter()
   const { gid } = router.query
 
-  const { getGallery, gallery, needToAuth, userImage } = useGalleryApi()
+  const { getGallery, gallery, needToAuth, userImage, saveToDb } =
+    useGalleryApi()
 
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -62,26 +63,6 @@ export default function Gallery() {
     // })
   }
 
-  async function saveToDb({ link, width, height, caption }) {
-    let response = await fetch(`/api/galleryImage`, {
-      method: `POST`,
-      headers: { 'Content-Type': `application/json` },
-      body: JSON.stringify({
-        token: localStorage.token,
-        galleryId: gid,
-        username: localStorage.username,
-        link,
-        caption,
-        width,
-        height,
-      }),
-    })
-
-    let { image } = await response.json()
-    setUserImage(image)
-    setYoutubeLink('')
-  }
-
   function uploadFile(event) {
     let files = event.target.files
 
@@ -97,7 +78,6 @@ export default function Gallery() {
 
     fileReader.onload = (event) => {
       let dataUrl = event.target.result
-      console.log({ img })
       setDataUrl(dataUrl)
       setImageSize(() => ({
         width: img.naturalWidth,
@@ -224,7 +204,10 @@ export default function Gallery() {
               viewImage={viewImage}
               submitYoutube={(link) => setYoutubeLink(link)}
               clearYoutubelink={() => setYoutubeLink('')}
-              saveToDb={saveToDb}
+              saveToDb={async (...args) => {
+                await saveToDb(...args)
+                setDataUrl(null)
+              }}
             />
           )}
         </>

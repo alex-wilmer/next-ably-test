@@ -1,9 +1,9 @@
-import React from 'react'
+import { useState } from 'react'
 // import ImagesToRate from './ImagesToRate'
 import UploadImage from './UploadImage'
 //import averageCriticalAssessmentScore from '../utils/averageCriticalAssessmentScore'
 
-let youtube, textarea
+let youtube
 
 export default function GalleryUserView({
   clearDataUrl,
@@ -20,6 +20,7 @@ export default function GalleryUserView({
   clearYoutubelink,
   saveToDb,
 }) {
+  const [caption, setCaption] = useState('')
   return (
     <div>
       {!gallery.passedDeadline && (
@@ -37,7 +38,7 @@ export default function GalleryUserView({
             !dataUrl && ( // user has submitted
               <div>
                 <div>
-                  {userImage.link.includes(`youtube`) && (
+                  {userImage.link?.includes(`youtube`) && (
                     <iframe
                       title={userImage.link}
                       width="560"
@@ -45,11 +46,11 @@ export default function GalleryUserView({
                       src={`https://www.youtube.com/embed/${userImage.link
                         .split(`=`)
                         .pop()}`}
-                      frameBorder="0"
+                      frapmeBorder="0"
                       allowFullScreen
                     />
                   )}
-                  {userImage.link.includes(`youtube`) || (
+                  {userImage.link?.includes(`youtube`) || (
                     <img // eslint-disable-line
                       alt="userImage"
                       src={userImage.link}
@@ -134,7 +135,8 @@ export default function GalleryUserView({
               </label>
 
               <textarea
-                ref={(node) => (textarea = node)}
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
                 rows="10"
                 style={{
                   marginBottom: `1rem`,
