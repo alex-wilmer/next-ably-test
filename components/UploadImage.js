@@ -46,7 +46,7 @@ export default function UploadImage({
           }}
         >
           <div>
-            <Image
+            <img // eslint-disable-line
               alt="dataUrl"
               src={dataUrl}
               style={{

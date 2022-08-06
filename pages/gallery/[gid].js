@@ -206,6 +206,8 @@ export default function Gallery() {
           {gallery.owner !== localStorage.username && (
             <GalleryUserView
               gallery={gallery}
+              dataUrl={dataUrl}
+              imageSize={imageSize}
               clearDataUrl={() => setDataUrl(null)}
               uploadFile={uploadFile}
               uploadToImgur={uploadToImgur}
