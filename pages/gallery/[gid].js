@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
+import Header from '../../components/Header'
 import useGalleryApi from '../../lib/hooks/useGalleryApi'
 import GalleryAdminView from '../../components/GalleryAdminView'
 import GalleryUserView from '../../components/GalleryUserView'
@@ -98,8 +100,8 @@ export default function Gallery() {
       let dataUrl = event.target.result
       setDataUrl(dataUrl)
       setImageSize({
-        width: img.width,
-        height: img.height,
+        width: img.naturalWidth,
+        height: img.naturalHeight,
       })
     }
 
@@ -132,15 +134,15 @@ export default function Gallery() {
     if (data.link) {
       setDataUrl(null)
 
-      this.saveToDb({
-        link: data.link,
-        width: data.width,
-        height: data.height,
-        caption,
-      })
+      // this.saveToDb({
+      //   link: data.link,
+      //   width: data.width,
+      //   height: data.height,
+      //   caption,
+      // })
     }
 
-    this.setState({ loading: false })
+    // this.setState({ loading: false })
   }
 
   function deleteGallery() {}
@@ -157,6 +159,13 @@ export default function Gallery() {
 
   return (
     <div>
+      <Head>
+        <title>Rater | {gallery?.name}</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Header />
+
       <Dialog open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
         <DialogTitle>Do you really want to delete this gallery?</DialogTitle>
         <Button onClick={() => setDeleteModalOpen(false)}>Cancel</Button>

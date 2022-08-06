@@ -9,6 +9,8 @@ export default function UploadImage({
   uploadFile,
   uploadToImgur,
 }) {
+  console.log({ imageSize })
+
   return (
     <div>
       {!!dataUrl || (
