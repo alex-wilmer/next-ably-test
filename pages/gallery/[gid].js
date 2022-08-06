@@ -9,7 +9,7 @@ import useGalleryApi from 'lib/hooks/useGalleryApi'
 import GalleryAdminView from 'components/GalleryAdminView'
 import GalleryUserView from 'components/GalleryUserView'
 import GalleryLogin from 'components/GalleryLogin'
-import ViewImage from 'components/ViewImage'
+// import ViewImage from 'components/ViewImage'
 
 export default function Gallery() {
   const router = useRouter()
@@ -174,7 +174,7 @@ export default function Gallery() {
 
       {gallery && (
         <>
-          {!!viewingImage && (
+          {/* {!!viewingImage && (
             <ViewImage
               asAdmin={gallery.owner === localStorage.username}
               // message={this.state.message}
@@ -182,7 +182,7 @@ export default function Gallery() {
               viewingImage={viewingImage}
               viewImage={viewImage}
             />
-          )}
+          )} */}
 
           <div
             style={{
