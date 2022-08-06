@@ -1,13 +1,10 @@
-import User from '../../lib/models/user'
+import User from 'lib/models/user'
 import crypto from 'crypto'
 import mongoose from 'mongoose'
 
 const SECRET = 'wubbalubbadubdub'
 
-export default function handler(
-  req,
-  res
-) {
+export default function handler(req, res) {
   mongoose.connect(process.env.MONGODB_URI)
 
   let { username, password } = req.body
@@ -30,7 +27,7 @@ export default function handler(
 
         if (username === `admin`) user.admin = true
 
-        user.save(err => {
+        user.save((err) => {
           if (err) throw err
           res.status(200).json({ success: true })
         })

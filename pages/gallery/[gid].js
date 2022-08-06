@@ -98,11 +98,12 @@ export default function Gallery() {
 
     fileReader.onload = (event) => {
       let dataUrl = event.target.result
+      console.log({ img })
       setDataUrl(dataUrl)
-      setImageSize({
+      setImageSize(() => ({
         width: img.naturalWidth,
         height: img.naturalHeight,
-      })
+      }))
     }
 
     fileReader.readAsDataURL(file)
@@ -134,12 +135,12 @@ export default function Gallery() {
     if (data.link) {
       setDataUrl(null)
 
-      // this.saveToDb({
-      //   link: data.link,
-      //   width: data.width,
-      //   height: data.height,
-      //   caption,
-      // })
+      this.saveToDb({
+        link: data.link,
+        width: data.width,
+        height: data.height,
+        caption,
+      })
     }
 
     // this.setState({ loading: false })
