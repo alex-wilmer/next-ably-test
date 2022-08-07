@@ -9,7 +9,7 @@ import useGalleryApi from 'lib/hooks/useGalleryApi'
 import GalleryAdminView from 'components/GalleryAdminView'
 import GalleryUserView from 'components/GalleryUserView'
 import GalleryLogin from 'components/GalleryLogin'
-import ViewImage from 'components/ViewImage'
+import ViewImage from 'components/ViewingImage'
 import ResultsTable from 'components/ResultsTable'
 
 export default function Gallery() {
