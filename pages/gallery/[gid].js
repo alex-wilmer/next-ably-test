@@ -9,7 +9,8 @@ import useGalleryApi from 'lib/hooks/useGalleryApi'
 import GalleryAdminView from 'components/GalleryAdminView'
 import GalleryUserView from 'components/GalleryUserView'
 import GalleryLogin from 'components/GalleryLogin'
-// import ViewImage from 'components/ViewImage'
+import ViewImage from 'components/ViewImage'
+import ResultsTable from 'components/ResultsTable'
 
 export default function Gallery() {
   const router = useRouter()
@@ -137,6 +138,18 @@ export default function Gallery() {
     }
   }
 
+  function getOwnerRating(image) {
+    let owner = image.raters.filter(
+      (x) => x.username === localStorage.username
+    )[0]
+
+    if (owner) {
+      return `${owner.rating} (${owner.rating / owner.multiplier} * ${
+        owner.multiplier
+      })`
+    }
+  }
+
   return (
     <div>
       <Head>
@@ -154,7 +167,7 @@ export default function Gallery() {
 
       {gallery && (
         <>
-          {/* {!!viewingImage && (
+          {!!viewingImage && (
             <ViewImage
               asAdmin={gallery.owner === localStorage.username}
               // message={this.state.message}
@@ -162,7 +175,7 @@ export default function Gallery() {
               viewingImage={viewingImage}
               viewImage={viewImage}
             />
-          )} */}
+          )}
 
           <div
             style={{
@@ -209,6 +222,16 @@ export default function Gallery() {
                 setDataUrl(null)
               }}
             />
+          )}
+
+          {gallery.owner === localStorage.username && (
+            <div style={{ marginTop: `2rem` }}>
+              <ResultsTable
+                images={gallery.images}
+                viewImage={viewImage}
+                getOwnerRating={getOwnerRating}
+              />
+            </div>
           )}
         </>
       )}

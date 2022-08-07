@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import StarRating from './StarRating'
 
 let feedback
@@ -59,7 +58,7 @@ export default function ViewImage({
           />
         )}
         {viewingImage.link.includes(`youtube`) || (
-          <Image
+          <img // eslint-disable-line
             alt="viewing_image"
             src={viewingImage.link}
             style={{
