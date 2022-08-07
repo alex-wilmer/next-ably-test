@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import StarRating from './StarRating'
 
-let feedback
+// let feedback
 
 export default function ViewImage({
   asAdmin,
@@ -9,6 +10,7 @@ export default function ViewImage({
   viewingImage,
   viewImage,
 }) {
+  const [feedback, setFeedback] = useState('')
   return (
     <div
       style={{
@@ -85,7 +87,8 @@ export default function ViewImage({
         </div>
         {asAdmin && (
           <textarea
-            ref={(node) => (feedback = node)}
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
             rows="10"
             placeholder="Provide feedback (optional)"
             defaultValue={viewingImage.feedback}
