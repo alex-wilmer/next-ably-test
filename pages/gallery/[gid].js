@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
+import Container from '@mui/material/Container'
 import DialogTitle from '@mui/material/DialogTitle'
 import Header from 'components/Header'
 import useGalleryApi from 'lib/hooks/useGalleryApi'
@@ -154,7 +155,7 @@ export default function Gallery() {
     <div>
       <Head>
         <title>Rater</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="ico  n" href="/favicon.ico" />
       </Head>
 
       <Header />
@@ -165,83 +166,79 @@ export default function Gallery() {
         <Button onClick={deleteGallery}>Yes, Delete Is!</Button>
       </Dialog>
 
-      {gallery && (
-        <>
-          {!!viewingImage && (
-            <ViewImage
-              asAdmin={gallery.owner === localStorage.username}
-              // message={this.state.message}
-              rate={rate}
-              viewingImage={viewingImage}
-              viewImage={viewImage}
-            />
-          )}
-
-          <div
-            style={{
-              padding: `3rem`,
-            }}
-          >
-            <div>Gallery: {gallery.name}</div>
-          </div>
-
-          {gallery.owner === localStorage.username && (
-            <GalleryAdminView
-              gallery={gallery}
-              colorPickerOpen={colorPickerOpen}
-              openColorPicker={() => setColorPickerOpen(true)}
-              setColor={setColor}
-              togglePublic={togglePublic}
-              openDeleteModal={() => setDeleteModalOpen(true)}
-            />
-          )}
-
-          <div>
-            <span>Submission Deadline:</span>
-            <span style={{ paddingLeft: `0.4rem` }}>
-              {gallery.submitDeadline}
-              {/* `MMMM Do YYYY, h:mm:ss a` */}
-              {/* )} */}
-            </span>
-          </div>
-
-          {gallery.owner !== localStorage.username && (
-            <GalleryUserView
-              gallery={gallery}
-              userImage={userImage}
-              dataUrl={dataUrl}
-              imageSize={imageSize}
-              clearDataUrl={() => setDataUrl(null)}
-              uploadFile={uploadFile}
-              uploadToImgur={uploadToImgur}
-              viewImage={viewImage}
-              submitYoutube={(link) => setYoutubeLink(link)}
-              clearYoutubelink={() => setYoutubeLink('')}
-              saveToDb={async (...args) => {
-                await saveToDb(...args)
-                setDataUrl(null)
-              }}
-            />
-          )}
-
-          {gallery.owner === localStorage.username && (
-            <div style={{ marginTop: `2rem` }}>
-              <ResultsTable
-                images={gallery.images}
+      <Container sx={{ pt: '1rem' }}>
+        {gallery && (
+          <>
+            {!!viewingImage && (
+              <ViewImage
+                asAdmin={gallery.owner === localStorage.username}
+                // message={this.state.message}
+                rate={rate}
+                viewingImage={viewingImage}
                 viewImage={viewImage}
-                getOwnerRating={getOwnerRating}
               />
-            </div>
-          )}
-        </>
-      )}
+            )}
 
-      {needToAuth && (
-        <GalleryLogin
-          getGallery={getGallery}
-          //  message={message}
-        />
-      )}
+            <div>Gallery: {gallery.name}</div>
+
+            {gallery.owner === localStorage.username && (
+              <GalleryAdminView
+                gallery={gallery}
+                colorPickerOpen={colorPickerOpen}
+                openColorPicker={() => setColorPickerOpen(true)}
+                setColor={setColor}
+                togglePublic={togglePublic}
+                openDeleteModal={() => setDeleteModalOpen(true)}
+              />
+            )}
+
+            <div>
+              <span>Submission Deadline:</span>
+              <span style={{ paddingLeft: `0.4rem` }}>
+                {gallery.submitDeadline}
+                {/* `MMMM Do YYYY, h:mm:ss a` */}
+                {/* )} */}
+              </span>
+            </div>
+
+            {gallery.owner !== localStorage.username && (
+              <GalleryUserView
+                gallery={gallery}
+                userImage={userImage}
+                dataUrl={dataUrl}
+                imageSize={imageSize}
+                clearDataUrl={() => setDataUrl(null)}
+                uploadFile={uploadFile}
+                uploadToImgur={uploadToImgur}
+                viewImage={viewImage}
+                submitYoutube={(link) => setYoutubeLink(link)}
+                clearYoutubelink={() => setYoutubeLink('')}
+                saveToDb={async (...args) => {
+                  await saveToDb(...args)
+                  setDataUrl(null)
+                }}
+              />
+            )}
+
+            {gallery.owner === localStorage.username && (
+              <div style={{ marginTop: `2rem` }}>
+                <ResultsTable
+                  images={gallery.images}
+                  viewImage={viewImage}
+                  getOwnerRating={getOwnerRating}
+                />
+              </div>
+            )}
+          </>
+        )}
+
+        {needToAuth && (
+          <GalleryLogin
+            getGallery={getGallery}
+            //  message={message}
+          />
+        )}
+      </Container>
     </div>
   )
 }

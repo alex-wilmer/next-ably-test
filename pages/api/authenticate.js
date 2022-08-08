@@ -1,4 +1,4 @@
-import User from '../../lib/models/user'
+import User from 'lib/models/user'
 import crypto from 'crypto'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
@@ -32,7 +32,7 @@ export default function handler(req, res) {
           },
           SECRET,
           {
-            expiresIn: 1440 * 60, // expires in 24 hours
+            expiresIn: 1440 * 6000, // don't expire or ages
           }
         )
 

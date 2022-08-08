@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import StarRating from './StarRating'
 
-// let feedback
-
 export default function ViewImage({
   asAdmin,
   message,
