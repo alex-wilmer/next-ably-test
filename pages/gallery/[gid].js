@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { format } from 'date-fns'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import Container from '@mui/material/Container'
@@ -155,7 +156,7 @@ export default function Gallery() {
     <div>
       <Head>
         <title>Rater</title>
-        <link rel="ico  n" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Header />
@@ -194,10 +195,10 @@ export default function Gallery() {
 
             <div>
               <span>Submission Deadline:</span>
+
               <span style={{ paddingLeft: `0.4rem` }}>
-                {gallery.submitDeadline}
-                {/* `MMMM Do YYYY, h:mm:ss a` */}
-                {/* )} */}
+                {gallery.submitDeadline &&
+                  format(+gallery.submitDeadline, 'MMMM Do yyyy, h:mm:ss a')}
               </span>
             </div>
 
