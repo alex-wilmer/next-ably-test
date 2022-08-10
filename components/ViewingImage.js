@@ -104,7 +104,7 @@ export default function ViewImage({
               viewingImage,
             }
 
-            if (asAdmin) ratingSpec.feedback = feedback.value
+            if (asAdmin) ratingSpec.feedback = feedback
 
             rate(ratingSpec)
           }}

@@ -18,8 +18,16 @@ export default function Gallery() {
   const router = useRouter()
   const { gid } = router.query
 
-  const { getGallery, gallery, needToAuth, userImage, saveToDb } =
-    useGalleryApi()
+  const {
+    getGallery,
+    gallery,
+    needToAuth,
+    userImage,
+    saveToDb,
+    activateDeadline,
+    togglePublic,
+    rate,
+  } = useGalleryApi()
 
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -45,25 +53,6 @@ export default function Gallery() {
     //   _id: this.state.gallery._id,
     // })
     setColorPickerOpen(false)
-  }
-
-  async function togglePublic() {
-    let response = await fetch(`/api/galleryTogglePublic`, {
-      method: `POST`,
-      headers: { 'Content-Type': `application/json` },
-      body: JSON.stringify({
-        token: localStorage.token,
-        galleryId: gid,
-      }),
-    }).then((r) => r.json())
-
-    if (response) {
-      setGallery(response)
-    }
-
-    // this.props.socket.emit(`ui:togglePublic`, {
-    //   _id: this.state.gallery._id,
-    // })
   }
 
   function uploadFile(event) {
@@ -130,8 +119,6 @@ export default function Gallery() {
 
   function deleteGallery() {}
 
-  function rate() {}
-
   function viewImage({ image }) {
     if (image && !image.rating) {
       setViewingImage(image)
@@ -184,6 +171,7 @@ export default function Gallery() {
 
             {gallery.owner === localStorage.username && (
               <GalleryAdminView
+                activateDeadline={activateDeadline}
                 gallery={gallery}
                 colorPickerOpen={colorPickerOpen}
                 openColorPicker={() => setColorPickerOpen(true)}
@@ -198,7 +186,7 @@ export default function Gallery() {
 
               <span style={{ paddingLeft: `0.4rem` }}>
                 {gallery.submitDeadline &&
-                  format(+gallery.submitDeadline, 'MMMM Do yyyy, h:mm:ss a')}
+                  format(+gallery.submitDeadline, 'MMMM do yyyy, h:mm:ss a')}
               </span>
             </div>
 
