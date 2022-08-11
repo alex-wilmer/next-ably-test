@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { TwitterPicker as ColorPicker } from 'react-color'
 import Button from '@mui/material/Button'
+import useGalleryApi from 'lib/hooks/useGalleryApi'
 
 function GalleryAdminView({
   gallery,
@@ -11,7 +12,7 @@ function GalleryAdminView({
   setColor,
   openDeleteModal,
 }) {
-  const [m, setM] = useState(5)
+  const { multiplier, setMultiplier } = useGalleryApi()
   return (
     <div>
       <div>Password: {gallery.password}</div>
@@ -58,8 +59,8 @@ function GalleryAdminView({
       <div>
         <span>Voting multiplier:</span>
         <input
-          value={m}
-          onChange={(e) => setM(e.target.value)}
+          value={multiplier}
+          onChange={(e) => setMultiplier(e.target.value)}
           style={{
             display: `inline-block`,
             width: `4rem`,

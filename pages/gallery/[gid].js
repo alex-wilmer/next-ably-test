@@ -157,15 +157,14 @@ export default function Gallery() {
       <Container sx={{ pt: '1rem' }}>
         {gallery && (
           <>
-            {!!viewingImage && (
-              <ViewImage
-                asAdmin={gallery.owner === localStorage.username}
-                // message={this.state.message}
-                rate={rate}
-                viewingImage={viewingImage}
-                viewImage={viewImage}
-              />
-            )}
+            <ViewImage
+              close={() => setViewingImage(null)}
+              asAdmin={gallery.owner === localStorage.username}
+              // message={this.state.message}
+              rate={rate}
+              viewingImage={viewingImage}
+              viewImage={viewImage}
+            />
 
             <div>Gallery: {gallery.name}</div>
 

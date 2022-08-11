@@ -1,5 +1,15 @@
 import { useState } from 'react'
 import StarRating from './StarRating'
+import Dialog from '@mui/material/Dialog'
+import DialogTitle from '@mui/material/DialogTitle'
+
+/*
+      <Dialog !!viewingImage={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
+        <DialogTitle>Do you really want to delete this gallery?</DialogTitle>
+        <Button onClick={() => setDeleteModalOpen(false)}>Cancel</Button>
+        <Button onClick={deleteGallery}>Yes, Delete Is!</Button>
+      </Dialog>
+*/
 
 export default function ViewImage({
   asAdmin,
@@ -7,23 +17,11 @@ export default function ViewImage({
   rate,
   viewingImage,
   viewImage,
+  close,
 }) {
   const [feedback, setFeedback] = useState('')
   return (
-    <div
-      style={{
-        position: `absolute`,
-        width: `100%`,
-        minHeight: `100%`,
-        padding: `4rem`,
-        top: 0,
-        left: 0,
-        display: `flex`,
-        justifyContent: `center`,
-        alignItems: `center`,
-        backgroundColor: `rgba(216, 236, 231, 0.55)`,
-      }}
-    >
+    <Dialog open={!!viewingImage} onClose={close}>
       <div
         style={{
           minWidth: `455px`,
@@ -41,11 +39,12 @@ export default function ViewImage({
             right: `15px`,
             top: `15px`,
             fontWeight: `bold`,
+            cursor: 'pointer',
           }}
         >
           ✕ CLOSE
         </a>
-        {viewingImage.link.includes(`youtube`) && (
+        {viewingImage?.link.includes(`youtube`) && (
           <iframe
             width="560"
             height="315"
@@ -57,22 +56,22 @@ export default function ViewImage({
             allowFullScreen
           />
         )}
-        {viewingImage.link.includes(`youtube`) || (
+        {!viewingImage?.link.includes(`youtube`) && (
           <img // eslint-disable-line
             alt="viewing_image"
-            src={viewingImage.link}
+            src={viewingImage?.link}
             style={{
               maxWidth: `40rem`,
             }}
           />
         )}
-        {viewingImage.width && viewingImage.height && (
+        {viewingImage?.width && viewingImage?.height && (
           <div
             style={{
               marginBottom: `1rem`,
             }}
           >
-            {viewingImage.width}px - {viewingImage.height}px
+            {viewingImage?.width}px - {viewingImage?.height}px
           </div>
         )}
         <div
@@ -81,15 +80,14 @@ export default function ViewImage({
             marginTop: `1.5rem`,
           }}
         >
-          {viewingImage.caption}
+          {viewingImage?.caption}
         </div>
         {asAdmin && (
           <textarea
-            value={feedback}
+            value={feedback || viewingImage?.feedback}
             onChange={(e) => setFeedback(e.target.value)}
             rows="10"
             placeholder="Provide feedback (optional)"
-            defaultValue={viewingImage.feedback}
             style={{
               margin: `1rem 0`,
               padding: `0.5rem`,
@@ -121,6 +119,6 @@ export default function ViewImage({
           {!!message && <div>{message}</div>}
         </div>
       </div>
-    </div>
+    </Dialog>
   )
 }
