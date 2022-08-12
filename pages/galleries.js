@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
+import Header from 'components/Header'
 import Link from 'next/link'
 import useGalleryApi from 'lib/hooks/useGalleryApi'
-import Header from 'components/Header'
 import useAuth from 'lib/hooks/useAuth'
 
 export default function Galleries() {

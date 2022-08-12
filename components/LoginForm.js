@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import Head from 'next/head'
+import Header from 'components/Header'
 import PinInput from 'react-pin-input'
 import { useRouter } from 'next/router'
 import Button from '@mui/material/Button'
@@ -15,37 +17,30 @@ export default function Login() {
   const [channel] = useChannel('userlist')
 
   return (
-    <div
-      style={{
-        height: `calc(100% - 5rem)`,
-        display: `flex`,
-        justifyContent: `center`,
-        alignItems: `center`,
-      }}
-    >
+    <div>
+      <Head>
+        <title>Rater | Login</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Header />
+
       <div
         style={{
+          marginTop: '2rem',
+          height: `calc(100% - 5rem)`,
           display: `flex`,
-          flexDirection: `column`,
-          minHeight: `200px`,
+          justifyContent: `center`,
+          alignItems: `center`,
         }}
       >
-        <label
+        <div
           style={{
-            fontSize: '1.2em',
-            textAlign: 'center',
-            width: '100%',
-            display: 'block',
+            display: `flex`,
+            flexDirection: `column`,
+            minHeight: `200px`,
           }}
         >
-          StudentID
-        </label>
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-        />
-        <div>
           <label
             style={{
               fontSize: '1.2em',
@@ -54,66 +49,83 @@ export default function Login() {
               display: 'block',
             }}
           >
-            4 Digit Pin (Remember this!)
+            StudentID
           </label>
-          <PinInput
-            length={4}
-            onChange={(value, index) => {
-              setPassword(value)
-            }}
-            type="numeric"
-            style={{ padding: '10px' }}
-            inputStyle={{ borderColor: 'rgb(165, 187, 179)' }}
-            inputFocusStyle={{ borderColor: 'blue' }}
-            onComplete={(value, index) => {}}
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
           />
-        </div>
-        <Button
-          onClick={async () => {
-            if (password.length !== 4) {
-              setMessage('Please enter a 4 digit pin.')
-            } else {
-              const response = await login({
+          <div>
+            <label
+              style={{
+                fontSize: '1.2em',
+                textAlign: 'center',
+                width: '100%',
+                display: 'block',
+              }}
+            >
+              4 Digit Pin (Remember this!)
+            </label>
+            <PinInput
+              length={4}
+              onChange={(value, index) => {
+                setPassword(value)
+              }}
+              type="numeric"
+              style={{ padding: '10px' }}
+              inputStyle={{ borderColor: 'rgb(165, 187, 179)' }}
+              inputFocusStyle={{ borderColor: 'blue' }}
+              onComplete={(value, index) => {}}
+            />
+          </div>
+          <Button
+            onClick={async () => {
+              if (password.length !== 4) {
+                setMessage('Please enter a 4 digit pin.')
+              } else {
+                const response = await login({
+                  username,
+                  password,
+                })
+
+                // something went wrong
+                if (response?.message) {
+                  setMessage(response.message)
+                }
+              }
+            }}
+            style={{
+              marginTop: `0.5rem`,
+            }}
+          >
+            Log In
+          </Button>
+          <Button
+            onClick={async () => {
+              const response = await signup({
                 username,
                 password,
               })
-
-              // something went wrong
               if (response?.message) {
                 setMessage(response.message)
+              } else {
+                channel.publish({ name: 'new-signup', data: username })
+                // login user after successful signup
+                await login({
+                  username,
+                  password,
+                })
               }
-            }
-          }}
-          style={{
-            marginTop: `0.5rem`,
-          }}
-        >
-          Log In
-        </Button>
-        <Button
-          onClick={async () => {
-            const response = await signup({
-              username,
-              password,
-            })
-            if (response?.message) {
-              setMessage(response.message)
-            } else {
-              channel.publish({ name: 'new-signup', data: username })
-              // login user after successful signup
-              await login({
-                username,
-                password,
-              })
-            }
-          }}
-          style={{
-            marginTop: `1rem`,
-          }}
-        >
-          Sign Up
-        </Button>
-        {!!message && <div>{message}</div>}
+            }}
+            style={{
+              marginTop: `1rem`,
+            }}
+          >
+            Sign Up
+          </Button>
+          {!!message && <div>{message}</div>}
+        </div>
       </div>
     </div>
   )
