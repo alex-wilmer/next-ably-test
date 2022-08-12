@@ -27,6 +27,7 @@ export default function Gallery() {
     activateDeadline,
     togglePublic,
     rate,
+    deleteGallery,
   } = useGalleryApi()
 
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
@@ -117,8 +118,6 @@ export default function Gallery() {
     // this.setState({ loading: false })
   }
 
-  function deleteGallery() {}
-
   function viewImage({ image }) {
     if (image && !image.rating) {
       setViewingImage(image)
@@ -151,7 +150,7 @@ export default function Gallery() {
       <Dialog open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
         <DialogTitle>Do you really want to delete this gallery?</DialogTitle>
         <Button onClick={() => setDeleteModalOpen(false)}>Cancel</Button>
-        <Button onClick={deleteGallery}>Yes, Delete Is!</Button>
+        <Button onClick={deleteGallery}>delete</Button>
       </Dialog>
 
       <Container sx={{ pt: '1rem' }}>
