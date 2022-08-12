@@ -3,10 +3,12 @@ import Head from 'next/head'
 import Link from 'next/link'
 import useGalleryApi from 'lib/hooks/useGalleryApi'
 import Header from 'components/Header'
+import useAuth from 'lib/hooks/useAuth'
 
-export default function Galleries({ admin = true }) {
+export default function Galleries() {
   const { getGalleries } = useGalleryApi()
   const [galleries, setGalleries] = useState([])
+  const [admin, setAdmin] = useState(false)
 
   useEffect(() => {
     async function req() {
@@ -14,6 +16,8 @@ export default function Galleries({ admin = true }) {
       // todo: response could be error with no token provided message
       // handle all auth errors somewhere
       if (response) setGalleries(response)
+
+      setAdmin(localStorage.admin === 'true')
     }
 
     req()

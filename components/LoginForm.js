@@ -81,8 +81,6 @@ export default function Login() {
               // something went wrong
               if (response?.message) {
                 setMessage(response.message)
-              } else {
-                router.push('/galleries')
               }
             }
           }}
@@ -107,7 +105,6 @@ export default function Login() {
                 username,
                 password,
               })
-              router.push('/galleries')
             }
           }}
           style={{

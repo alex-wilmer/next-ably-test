@@ -1,4 +1,5 @@
-let textarea
+import { useState } from 'react'
+import Box from '@mui/material/Box'
 
 export default function UploadImage({
   clearDataUrl,
@@ -7,6 +8,7 @@ export default function UploadImage({
   uploadFile,
   uploadToImgur,
 }) {
+  const [caption, setCaption] = useState('')
   return (
     <div>
       {!!dataUrl || (
@@ -75,24 +77,29 @@ export default function UploadImage({
               Figure caption:
             </label>
 
-            <textarea
-              ref={(node) => (textarea = node)}
-              rows="10"
-              style={{
-                marginBottom: `1rem`,
-                height: `8rem`,
-              }}
-            />
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <textarea
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
+                rows="10"
+                style={{
+                  marginBottom: `1rem`,
+                  height: `8rem`,
+                }}
+              />
 
-            <button onClick={clearDataUrl}>Cancel</button>
-            <button
-              onClick={() => uploadToImgur({ caption: textarea.value })}
-              style={{
-                marginLeft: `3rem`,
-              }}
-            >
-              Save
-            </button>
+              <Box>
+                <button onClick={clearDataUrl}>Cancel</button>
+                <button
+                  onClick={() => uploadToImgur({ caption })}
+                  style={{
+                    marginLeft: `3rem`,
+                  }}
+                >
+                  Save
+                </button>
+              </Box>
+            </Box>
           </div>
         </div>
       )}

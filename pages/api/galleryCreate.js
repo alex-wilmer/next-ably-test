@@ -23,6 +23,7 @@ export default async function handler(req, res) {
           password,
           submitDeadline,
           owner,
+          public: false,
           active: true,
           passedDeadline: false,
           createdDate: +new Date(),
