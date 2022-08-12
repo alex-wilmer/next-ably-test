@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import YouTube from 'react-youtube'
 import ImagesToRate from './ImagesToRate'
 import UploadImage from './UploadImage'
+import ShareYoutube from './ShareYoutube'
 import averageCriticalAssessmentScore from 'lib/averageCriticalAssessmentScore'
 
 export default function GalleryUserView({
@@ -19,7 +21,17 @@ export default function GalleryUserView({
   saveToDb,
 }) {
   const [youtube, setYoutube] = useState('')
-  const [caption, setCaption] = useState('')
+
+  const opts = {
+    height: '390',
+    width: '640',
+    playerVars: {
+      autoplay: 0,
+    },
+  }
+
+  console.log({ userImage })
+
   return (
     <div>
       {!gallery.passedDeadline && (
@@ -37,19 +49,13 @@ export default function GalleryUserView({
             !dataUrl && ( // user has submitted
               <div>
                 <div>
-                  {userImage.link?.includes(`youtube`) && (
-                    <iframe
-                      title={userImage.link}
-                      width="560"
-                      height="315"
-                      src={`https://www.youtube.com/embed/${userImage.link
-                        .split(`=`)
-                        .pop()}`}
-                      frapmeBorder="0"
-                      allowFullScreen
+                  {userImage.link?.includes(`youtu`) && (
+                    <YouTube
+                      videoId={userImage.link.split('/').pop()}
+                      opts={opts}
                     />
                   )}
-                  {userImage.link?.includes(`youtube`) || (
+                  {!userImage.link?.includes(`youtu`) && (
                     <img // eslint-disable-line
                       alt="userImage"
                       src={userImage.link}
@@ -111,49 +117,11 @@ export default function GalleryUserView({
           )}
 
           {!!youtubeLink && !link && (
-            <div>
-              <iframe
-                width="560"
-                height="315"
-                title={youtubeLink}
-                src={`https://www.youtube.com/embed/${youtubeLink
-                  .split(`=`)
-                  .pop()}`}
-                frameBorder="0"
-                allowFullScreen
-              />
-              <label
-                style={{
-                  fontSize: `1.1rem`,
-                  display: `block`,
-                  marginBottom: `0.5rem`,
-                }}
-              >
-                Figure caption:
-              </label>
-
-              <textarea
-                value={caption}
-                onChange={(e) => setCaption(e.target.value)}
-                rows="10"
-                style={{
-                  marginBottom: `1rem`,
-                  height: `8rem`,
-                }}
-              />
-
-              <button onClick={clearYoutubelink}>Cancel</button>
-              <button
-                onClick={() =>
-                  saveToDb({ link: youtubeLink, caption: textarea.value })
-                }
-                style={{
-                  marginLeft: `3rem`,
-                }}
-              >
-                Save
-              </button>
-            </div>
+            <ShareYoutube
+              clearYoutubelink={clearYoutubelink}
+              youtubeLink={youtubeLink}
+              saveToDb={saveToDb}
+            />
           )}
         </div>
       )}

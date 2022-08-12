@@ -1,15 +1,7 @@
 import { useState } from 'react'
+import YouTube from 'react-youtube'
 import StarRating from './StarRating'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
-
-/*
-      <Dialog !!viewingImage={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
-        <DialogTitle>Do you really want to delete this gallery?</DialogTitle>
-        <Button onClick={() => setDeleteModalOpen(false)}>Cancel</Button>
-        <Button onClick={deleteGallery}>Yes, Delete Is!</Button>
-      </Dialog>
-*/
 
 export default function ViewImage({
   asAdmin,
@@ -20,11 +12,18 @@ export default function ViewImage({
   close,
 }) {
   const [feedback, setFeedback] = useState('')
+
+  const opts = {
+    playerVars: {
+      autoplay: 0,
+    },
+  }
+
   return (
     <Dialog open={!!viewingImage} onClose={close}>
       <div
         style={{
-          minWidth: `455px`,
+          // minWidth: `455px`,
           padding: `5rem`,
           backgroundColor: `white`,
           border: `1px solid rgb(151, 185, 169)`,
@@ -44,19 +43,10 @@ export default function ViewImage({
         >
           ✕ CLOSE
         </a>
-        {viewingImage?.link.includes(`youtube`) && (
-          <iframe
-            width="560"
-            height="315"
-            title={viewingImage.link}
-            src={`https://www.youtube.com/embed/${viewingImage.link
-              .split(`=`)
-              .pop()}`}
-            frameBorder="0"
-            allowFullScreen
-          />
+        {viewingImage?.link.includes(`youtu`) && (
+          <YouTube videoId={viewingImage.link.split('/').pop()} opts={opts} />
         )}
-        {!viewingImage?.link.includes(`youtube`) && (
+        {!viewingImage?.link.includes(`youtu`) && (
           <img // eslint-disable-line
             alt="viewing_image"
             src={viewingImage?.link}

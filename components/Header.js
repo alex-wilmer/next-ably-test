@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import useAuth from 'lib/hooks/useAuth'
-import useGalleryApi from 'lib/hooks/useGalleryApi'
 
 function Header({ color }) {
   const { localValues, logout } = useAuth()

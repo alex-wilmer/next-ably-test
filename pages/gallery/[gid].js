@@ -32,9 +32,10 @@ export default function Gallery() {
     deleteGallery,
     message,
     setColor,
+    colorPickerOpen,
+    setColorPickerOpen,
   } = useGalleryApi()
 
-  const [colorPickerOpen, setColorPickerOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [viewingImage, setViewingImage] = useState()
   const [dataUrl, setDataUrl] = useState(null)
@@ -209,6 +210,7 @@ export default function Gallery() {
                 viewImage={viewImage}
                 submitYoutube={(link) => setYoutubeLink(link)}
                 clearYoutubelink={() => setYoutubeLink('')}
+                youtubeLink={youtubeLink}
                 saveToDb={async (...args) => {
                   await saveToDb(...args)
                   setDataUrl(null)
