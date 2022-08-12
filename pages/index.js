@@ -1,11 +1,17 @@
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
+import { useEffect } from 'react'
 import Head from 'next/head'
 import Header from 'components/Header'
-
-// const AblyChatComponent = dynamic(() => import('../components/AblyChatComponent'), { ssr: false });
+import { useRouter } from 'next/router'
 
 export default function Home() {
+  const router = useRouter()
+
+  useEffect(() => {
+    if (localStorage.token) {
+      router.push('/galleries')
+    }
+  }, []) // eslint-disable-line
+
   return (
     <div
       className="container"
@@ -19,17 +25,6 @@ export default function Home() {
       </Head>
 
       <Header />
-
-      <Link href="/galleries">
-        <a
-          style={{
-            marginLeft: `1rem`,
-            color: `#f0ff3e`,
-          }}
-        >
-          See Galleries
-        </a>
-      </Link>
     </div>
   )
 }
