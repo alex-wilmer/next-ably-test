@@ -22,8 +22,6 @@ export default async function handler(req, res) {
        *  Admin Vote
        */
 
-      console.log('!!', req.body.rating, req.body.multiplier)
-
       if (gallery.owner === req.body.username) {
         image.raters = [
           ...image.raters.filter((x) => x.username !== req.body.username),

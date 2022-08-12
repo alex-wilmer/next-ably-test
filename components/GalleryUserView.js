@@ -1,9 +1,7 @@
 import { useState } from 'react'
-// import ImagesToRate from './ImagesToRate'
+import ImagesToRate from './ImagesToRate'
 import UploadImage from './UploadImage'
-//import averageCriticalAssessmentScore from '../utils/averageCriticalAssessmentScore'
-
-let youtube
+import averageCriticalAssessmentScore from 'lib/averageCriticalAssessmentScore'
 
 export default function GalleryUserView({
   clearDataUrl,
@@ -20,6 +18,7 @@ export default function GalleryUserView({
   clearYoutubelink,
   saveToDb,
 }) {
+  const [youtube, setYoutube] = useState('')
   const [caption, setCaption] = useState('')
   return (
     <div>
@@ -103,12 +102,11 @@ export default function GalleryUserView({
             <div>
               <div>or paste youtube link</div>
               <input
-                ref={(node) => (youtube = node)}
+                value={youtube}
+                onChange={(e) => setYoutube(e.target.value)}
                 style={{ width: `20rem` }}
               />
-              <button onClick={() => submitYoutube(youtube.value)}>
-                Submit
-              </button>
+              <button onClick={() => submitYoutube(youtube)}>Submit</button>
             </div>
           )}
 
@@ -162,11 +160,11 @@ export default function GalleryUserView({
       {gallery.passedDeadline && !userImage && (
         <div>The deadline has passed.</div>
       )}
-      {/* {gallery.passedDeadline && (
+      {gallery.passedDeadline && (
         <div>
           {!!userImage && ( // user has submitted
             <div>
-              {userImage.imagesToRate.every(x => x.rating) && (
+              {!userImage.imagesToRate.length && (
                 <div
                   style={{
                     height: `10rem`,
@@ -183,38 +181,61 @@ export default function GalleryUserView({
                       margin: `1rem 0`,
                     }}
                   >
-                    Thank you for rating!
-                  </div>
-                  <div>
-                    <div>
-                      Current Average Rating:{' '}
-                      {userImage.averageRating
-                        ? userImage.averageRating
-                        : `No ratings yet.`}{' '}
-                    </div>
-                    <div>
-                      Current Critical Assessment:{' '}
-                      {averageCriticalAssessmentScore(userImage)}
-                    </div>
-                    <div
-                      style={{
-                        marginTop: `0.5rem`,
-                        fontWeight: `bold`,
-                      }}
-                    >
-                      Instructor feedback:
-                    </div>
-                    <div>{userImage.feedback || `None at this time.`}</div>
+                    You have not been assigned any images to rate.
                   </div>
                 </div>
               )}
-              {userImage.imagesToRate.every(x => x.rating) || (
+              {!!userImage.imagesToRate.length &&
+                userImage.imagesToRate.every((x) => x.rating) && (
+                  <div
+                    style={{
+                      height: `10rem`,
+                      display: `flex`,
+                      flexDirection: `column`,
+                      justifyContent: `center`,
+                      alignItems: `center`,
+                      fontSize: `1.3rem`,
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontWeight: `bold`,
+                        margin: `1rem 0`,
+                      }}
+                    >
+                      Thank you for rating!
+                    </div>
+                    <div>
+                      <div>
+                        Current Average Rating:{' '}
+                        {userImage.averageRating
+                          ? userImage.averageRating
+                          : `No ratings yet.`}{' '}
+                      </div>
+                      <div>
+                        Current Critical Assessment:{' '}
+                        {averageCriticalAssessmentScore(userImage)}
+                      </div>
+                      <div
+                        style={{
+                          marginTop: `0.5rem`,
+                          fontWeight: `bold`,
+                        }}
+                      >
+                        Instructor feedback:
+                      </div>
+                      <div>{!userImage.feedback && `None at this time.`}</div>
+                    </div>
+                  </div>
+                )}
+              {userImage.imagesToRate.every((x) => x.rating) || (
                 <ImagesToRate userImage={userImage} viewImage={viewImage} />
               )}
             </div>
           )}
-          {!!userImage || <div>The deadline has passed.</div>}
-        </div> */}
+          {!userImage && <div>The deadline has passed.</div>}
+        </div>
+      )}
     </div>
   )
 }
