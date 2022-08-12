@@ -11,6 +11,8 @@ export default function Galleries({ admin = true }) {
   useEffect(() => {
     async function req() {
       const response = await getGalleries()
+      // todo: response could be error with no token provided message
+      // handle all auth errors somewhere
       if (response) setGalleries(response)
     }
 
@@ -57,7 +59,7 @@ export default function Galleries({ admin = true }) {
           </Link>
         )}
 
-        {galleries.map((g) => (
+        {galleries?.map((g) => (
           <Link href={`/gallery/${g._id}`} key={g._id}>
             <a
               style={{

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import Head from 'next/head'
 import { format } from 'date-fns'
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
 import Container from '@mui/material/Container'
 import DialogTitle from '@mui/material/DialogTitle'
@@ -154,6 +156,19 @@ export default function Gallery() {
       </Dialog>
 
       <Container sx={{ pt: '1rem' }}>
+        <Box sx={{ mb: '1rem' }}>
+          <Link href="/galleries">
+            <a
+              style={{
+                color: `black`,
+                fontSize: `1.4em`,
+              }}
+            >
+              ← Back To Galleries
+            </a>
+          </Link>
+        </Box>
+
         {gallery && (
           <>
             <ViewImage
