@@ -30,6 +30,7 @@ export default function Gallery() {
     togglePublic,
     rate,
     deleteGallery,
+    message,
   } = useGalleryApi()
 
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
@@ -73,7 +74,7 @@ export default function Gallery() {
 
     fileReader.onload = (event) => {
       let dataUrl = event.target.result
-      setDataUrl(dataUrl)
+      setDataUrl(() => dataUrl)
       setImageSize(() => ({
         width: img.naturalWidth,
         height: img.naturalHeight,
@@ -235,10 +236,7 @@ export default function Gallery() {
         )}
 
         {needToAuth && (
-          <GalleryLogin
-            getGallery={getGallery}
-            //  message={message}
-          />
+          <GalleryLogin getGallery={getGallery} message={message} />
         )}
       </Container>
     </div>
