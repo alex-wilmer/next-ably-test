@@ -1,14 +1,15 @@
 import Link from 'next/link'
 import useAuth from 'lib/hooks/useAuth'
+import useGalleryApi from 'lib/hooks/useGalleryApi'
 
-function Header() {
+function Header({ color }) {
   const { localValues, logout } = useAuth()
+
   return (
     <div
       className="z-depth-2"
       style={{
-        // backgroundColor: this.state.headerColor,
-        backgroundColor: 'blue',
+        backgroundColor: color || '#6acbba',
         height: `5rem`,
         width: `100%`,
         padding: `0 3rem`,

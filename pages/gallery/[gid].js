@@ -31,6 +31,7 @@ export default function Gallery() {
     rate,
     deleteGallery,
     message,
+    setColor,
   } = useGalleryApi()
 
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
@@ -50,14 +51,6 @@ export default function Gallery() {
 
     req()
   }, [gid])
-
-  function setColor(color) {
-    // this.props.socket.emit(`ui:setGalleryColor`, {
-    //   color,
-    //   _id: this.state.gallery._id,
-    // })
-    setColorPickerOpen(false)
-  }
 
   function uploadFile(event) {
     let files = event.target.files
@@ -148,7 +141,7 @@ export default function Gallery() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header color={gallery?.color} />
 
       <Dialog open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
         <DialogTitle>Do you really want to delete this gallery?</DialogTitle>
