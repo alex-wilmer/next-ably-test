@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Button, TextField } from '@mui/material'
 
 export default function GalleryLogin({ getGallery, message }) {
   const [password, setPassword] = useState('')
@@ -21,13 +22,16 @@ export default function GalleryLogin({ getGallery, message }) {
           flexDirection: `column`,
         }}
       >
-        <input
+        <TextField
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password.."
           type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          id="outlined-basic"
+          label="Password"
+          variant="outlined"
+          sx={{ mb: '2rem' }}
         />
-        <button onClick={() => getGallery({ password })}>Submit</button>
+        <Button onClick={() => getGallery({ password })}>Submit</Button>
         {!!message && <div>{message}</div>}
       </div>
     </div>

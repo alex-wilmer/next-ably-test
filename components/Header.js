@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import useAuth from 'lib/hooks/useAuth'
+import { Box } from '@mui/material'
 
 function Header({ color }) {
   const { localValues, logout } = useAuth()
@@ -18,14 +19,16 @@ function Header({ color }) {
       }}
     >
       <Link href="/">
-        <a
-          style={{
-            color: `white`,
-            fontSize: `1.4em`,
+        <Box
+          sx={{
+            color: 'rgba(255, 255, 255, 0.8)',
+            fontSize: '24px',
+            letterSpacing: '6px',
+            ml: '16px',
           }}
         >
-          Rater
-        </a>
+          RATER
+        </Box>
       </Link>
       {localValues.isAdmin && (
         <Link href="/userlist">
@@ -56,25 +59,6 @@ function Header({ color }) {
           >
             Log out
           </a>
-        </div>
-      )}
-      {!localValues.isLoggedIn && (
-        <div
-          style={{
-            marginLeft: `auto`,
-          }}
-        >
-          <Link href="/login">
-            <a
-              style={{
-                cursor: 'pointer',
-                marginLeft: `1rem`,
-                color: `white`,
-              }}
-            >
-              Get Started
-            </a>
-          </Link>
         </div>
       )}
     </div>

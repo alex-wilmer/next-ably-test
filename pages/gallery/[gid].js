@@ -175,7 +175,9 @@ export default function Gallery() {
               viewImage={viewImage}
             />
 
-            <div>Gallery: {gallery.name}</div>
+            <Box sx={{ fontSize: '20px', mb: '0.3rem' }}>
+              Gallery: {gallery.name}
+            </Box>
 
             {gallery.owner === localStorage.username && (
               <GalleryAdminView

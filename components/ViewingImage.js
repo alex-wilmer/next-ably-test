@@ -23,10 +23,11 @@ export default function ViewImage({
     <Dialog open={!!viewingImage} onClose={close}>
       <div
         style={{
+          minWidth: `400px`,
           backgroundColor: `white`,
-          border: `1px solid rgb(151, 185, 169)`,
           position: `relative`,
           textAlign: `center`,
+          marginBottom: `3rem`,
         }}
       >
         {viewingImage?.link.includes(`youtu`) && (

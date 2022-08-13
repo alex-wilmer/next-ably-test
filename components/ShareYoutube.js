@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import YouTube from 'react-youtube'
 import Box from '@mui/material/Box'
+import { Button } from '@mui/material'
 
 function ShareYoutube({ youtubeLink, saveToDb, clearYoutubelink }) {
   const [caption, setCaption] = useState('')
@@ -14,13 +15,14 @@ function ShareYoutube({ youtubeLink, saveToDb, clearYoutubelink }) {
   }
 
   return (
-    <div>
+    <div style={{ marginTop: '2rem' }}>
       <YouTube videoId={youtubeLink.split('/').pop()} opts={opts} />
 
       <label
         style={{
           fontSize: `1.1rem`,
           display: `block`,
+          marginTop: `1rem`,
           marginBottom: `0.5rem`,
         }}
       >
@@ -37,15 +39,15 @@ function ShareYoutube({ youtubeLink, saveToDb, clearYoutubelink }) {
           }}
         />
         <Box>
-          <button onClick={clearYoutubelink}>Cancel</button>
-          <button
+          <Button onClick={clearYoutubelink}>Cancel</Button>
+          <Button
             onClick={() => saveToDb({ link: youtubeLink, caption })}
             style={{
               marginLeft: `3rem`,
             }}
           >
             Save
-          </button>
+          </Button>
         </Box>
       </Box>
     </div>

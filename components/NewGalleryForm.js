@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Head from 'next/head'
 import Header from 'components/Header'
 import Link from 'next/link'
+import { Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -42,17 +43,21 @@ export default function NewGalleryForm() {
           }}
         >
           <h2>New Gallery:</h2>
-          <input
+          <TextField
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Name.."
-            type="text"
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
+            sx={{ mb: '0.3rem' }}
           />
-          <input
+          <TextField
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password.."
-            type="text"
+            id="outlined-basic"
+            label="Password"
+            variant="outlined"
+            sx={{ mb: '0.6rem' }}
           />
           <hr />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -70,7 +75,7 @@ export default function NewGalleryForm() {
               marginTop: `1.5rem`,
             }}
           >
-            <button
+            <Button
               style={{
                 width: `100%`,
                 marginBottom: `1rem`,
@@ -84,16 +89,16 @@ export default function NewGalleryForm() {
               }}
             >
               Create
-            </button>
+            </Button>
             <Link href="/">
               <a>
-                <button
+                <Button
                   style={{
                     width: `100%`,
                   }}
                 >
                   Cancel
-                </button>
+                </Button>
               </a>
             </Link>
           </div>

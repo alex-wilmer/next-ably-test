@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Box from '@mui/material/Box'
+import { Button } from '@mui/material'
 
 export default function UploadImage({
   clearDataUrl,
@@ -24,16 +25,19 @@ export default function UploadImage({
               margin: `2rem 0`,
             }}
           >
-            <input
-              type="file"
-              name="imageFile"
-              onChange={uploadFile}
-              style={{
-                height: `100%`,
-                width: `100%`,
-              }}
-            />
-            <button htmlFor="file">Upload Image</button>
+            <Button variant="contained" component="label">
+              Upload Image
+              <input
+                hidden
+                type="file"
+                name="imageFile"
+                onChange={uploadFile}
+                style={{
+                  height: `100%`,
+                  width: `100%`,
+                }}
+              />
+            </Button>
           </div>
         </form>
       )}
@@ -89,15 +93,15 @@ export default function UploadImage({
               />
 
               <Box>
-                <button onClick={clearDataUrl}>Cancel</button>
-                <button
+                <Button onClick={clearDataUrl}>Cancel</Button>
+                <Button
                   onClick={() => uploadToImgur({ caption })}
                   style={{
                     marginLeft: `3rem`,
                   }}
                 >
                   Save
-                </button>
+                </Button>
               </Box>
             </Box>
           </div>

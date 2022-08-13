@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import YouTube from 'react-youtube'
+import { Button, TextField } from '@mui/material'
 import ImagesToRate from './ImagesToRate'
 import UploadImage from './UploadImage'
 import ShareYoutube from './ShareYoutube'
@@ -104,13 +105,19 @@ export default function GalleryUserView({
           )}
           {!!link || (
             <div>
-              <div>or paste youtube link</div>
-              <input
+              <TextField
                 value={youtube}
+                sx={{ width: '30rem' }}
                 onChange={(e) => setYoutube(e.target.value)}
-                style={{ width: `20rem` }}
+                label="Youtube Share URL"
+                InputProps={{
+                  endAdornment: (
+                    <Button onClick={() => submitYoutube(youtube)}>
+                      Submit
+                    </Button>
+                  ),
+                }}
               />
-              <button onClick={() => submitYoutube(youtube)}>Submit</button>
             </div>
           )}
 

@@ -5,6 +5,7 @@ import PinInput from 'react-pin-input'
 import Button from '@mui/material/Button'
 import useAuth from 'lib/hooks/useAuth'
 import useChannel from 'lib/hooks/useChannel'
+import { TextField } from '@mui/material'
 
 export default function Login() {
   const { signup, login } = useAuth()
@@ -38,20 +39,13 @@ export default function Login() {
             minHeight: `200px`,
           }}
         >
-          <label
-            style={{
-              fontSize: '1.2em',
-              textAlign: 'center',
-              width: '100%',
-              display: 'block',
-            }}
-          >
-            StudentID
-          </label>
-          <input
+          <TextField
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            type="text"
+            id="outlined-basic"
+            label="StudentID"
+            variant="outlined"
+            sx={{ mb: '2rem' }}
           />
           <div>
             <label
