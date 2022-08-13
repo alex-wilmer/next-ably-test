@@ -3,19 +3,14 @@
   border: none;
   transform: rotateY(180deg);
 }
-.rating input, .rating span {
+.rating input,
+.rating span {
   display: none;
-}
-.rating label:before {
-  cursor: pointer;
-  margin: 5px;
-  font-size: 2.25em;
-  font-family: FontAwesome;
-  display: inline-block;
-  content: "\f005";
 }
 .rating label {
   color: #ddd;
+  cursor: pointer;
+  font-size: 40px;
 }
 /***** CSS Magic to Highlight Stars on Hover *****/
 .rating input:checked ~ label,
