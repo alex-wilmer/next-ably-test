@@ -2,14 +2,11 @@ import { useState } from 'react'
 import Head from 'next/head'
 import Header from 'components/Header'
 import PinInput from 'react-pin-input'
-import { useRouter } from 'next/router'
 import Button from '@mui/material/Button'
 import useAuth from 'lib/hooks/useAuth'
 import useChannel from 'lib/hooks/useChannel'
 
 export default function Login() {
-  const router = useRouter()
-  const { nextPathname } = router.query
   const { signup, login } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')

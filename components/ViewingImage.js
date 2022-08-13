@@ -23,26 +23,12 @@ export default function ViewImage({
     <Dialog open={!!viewingImage} onClose={close}>
       <div
         style={{
-          // minWidth: `455px`,
-          padding: `5rem`,
           backgroundColor: `white`,
           border: `1px solid rgb(151, 185, 169)`,
           position: `relative`,
           textAlign: `center`,
         }}
       >
-        <a
-          onClick={() => viewImage({ image: null })}
-          style={{
-            position: `absolute`,
-            right: `15px`,
-            top: `15px`,
-            fontWeight: `bold`,
-            cursor: 'pointer',
-          }}
-        >
-          ✕ CLOSE
-        </a>
         {viewingImage?.link.includes(`youtu`) && (
           <YouTube videoId={viewingImage.link.split('/').pop()} opts={opts} />
         )}

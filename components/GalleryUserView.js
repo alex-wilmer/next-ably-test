@@ -30,8 +30,6 @@ export default function GalleryUserView({
     },
   }
 
-  console.log({ userImage })
-
   return (
     <div>
       {!gallery.passedDeadline && (
