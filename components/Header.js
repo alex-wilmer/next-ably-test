@@ -8,7 +8,7 @@ function Header({ color }) {
     <div
       className="z-depth-2"
       style={{
-        backgroundColor: color || '#6acbba',
+        backgroundColor: color || '#3b3b8e',
         height: `5rem`,
         width: `100%`,
         padding: `0 3rem`,
