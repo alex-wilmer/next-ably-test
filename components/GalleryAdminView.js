@@ -93,7 +93,7 @@ function GalleryAdminView({
 
       <Button
         variant="contained"
-        onClick={() => generateCSV(gallery.images)}
+        onClick={() => generateCSV(gallery.images, gallery.name)}
         style={{ float: `right` }}
       >
         Export CSV
