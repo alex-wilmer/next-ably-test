@@ -4,6 +4,7 @@ import Header from 'components/Header'
 import Link from 'next/link'
 import useGalleryApi from 'lib/hooks/useGalleryApi'
 import { sortBy } from 'lodash'
+import useChannel from 'lib/hooks/useChannel'
 
 export default function Galleries() {
   const { getGalleries } = useGalleryApi()

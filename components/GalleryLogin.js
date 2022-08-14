@@ -1,9 +1,11 @@
-import { useState } from 'react'
 import { Button, TextField } from '@mui/material'
 
-export default function GalleryLogin({ getGallery, message }) {
-  const [password, setPassword] = useState('')
-
+export default function GalleryLogin({
+  getGallery,
+  message,
+  galleryPassword,
+  setGalleryPassword,
+}) {
   return (
     <div
       style={{
@@ -23,15 +25,17 @@ export default function GalleryLogin({ getGallery, message }) {
         }}
       >
         <TextField
-          value={password}
+          value={galleryPassword}
           type="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setGalleryPassword(e.target.value)}
           id="outlined-basic"
           label="Password"
           variant="outlined"
           sx={{ mb: '2rem' }}
         />
-        <Button onClick={() => getGallery({ password })}>Submit</Button>
+        <Button onClick={() => getGallery({ password: galleryPassword })}>
+          Submit
+        </Button>
         {!!message && <div>{message}</div>}
       </div>
     </div>

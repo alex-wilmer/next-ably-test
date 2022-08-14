@@ -34,6 +34,8 @@ export default function Gallery() {
     setColor,
     colorPickerOpen,
     setColorPickerOpen,
+    galleryPassword,
+    setGalleryPassword,
   } = useGalleryApi()
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -233,7 +235,12 @@ export default function Gallery() {
         )}
 
         {needToAuth && (
-          <GalleryLogin getGallery={getGallery} message={message} />
+          <GalleryLogin
+            galleryPassword={galleryPassword}
+            setGalleryPassword={setGalleryPassword}
+            getGallery={getGallery}
+            message={message}
+          />
         )}
       </Container>
     </div>
