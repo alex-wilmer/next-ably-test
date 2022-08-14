@@ -32,8 +32,6 @@ export default async function handler(req, res) {
           },
         ]
 
-        if (!image?.raters?.length) return
-
         image.averageRating =
           image.raters.reduce((acc, rater) => {
             return acc + rater.rating
@@ -76,8 +74,6 @@ export default async function handler(req, res) {
           let ownerRate = image.raters.filter((x) => x.multiplier)[0]
 
           let multiplier = ownerRate ? ownerRate.multiplier - 1 : 0
-
-          if (!image?.raters?.length) return
 
           image.averageRating =
             image.raters.reduce((acc, rater) => {
