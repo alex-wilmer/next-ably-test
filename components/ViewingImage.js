@@ -1,23 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import YouTube from 'react-youtube'
 import StarRating from './StarRating'
 import Dialog from '@mui/material/Dialog'
 
-// TODO: pass existing feedback first as default
-// TODO: youtube videos need thumbnail
-// TODO: missing instructor feedback
-// TODO: one decimal place average rating
-// TODO: sort by username
+// TODO: output excel
 
 export default function ViewImage({
   asAdmin,
   message,
   rate,
   viewingImage,
-  viewImage,
   close,
 }) {
   const [feedback, setFeedback] = useState('')
+
+  useEffect(() => {
+    setFeedback(viewingImage?.feedback || '')
+  }, [viewingImage?.feedback])
 
   const opts = {
     playerVars: {
@@ -67,7 +66,7 @@ export default function ViewImage({
         </div>
         {asAdmin && (
           <textarea
-            value={feedback || viewingImage?.feedback}
+            value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
             rows="10"
             placeholder="Provide feedback (optional)"

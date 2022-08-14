@@ -196,7 +196,7 @@ export default function Gallery() {
 
               <span style={{ paddingLeft: `0.4rem` }}>
                 {gallery.submitDeadline &&
-                  format(+gallery.submitDeadline, 'MMMM do yyyy, h:mm:ss a')}
+                  format(+gallery.submitDeadline, 'MMMM do yyyy, h:mm a')}
               </span>
             </div>
 

@@ -182,12 +182,12 @@ export default function GalleryUserView({
                       <div>
                         Current Average Rating:{' '}
                         {userImage.averageRating
-                          ? userImage.averageRating
+                          ? userImage.averageRating.toFixed(1)
                           : `No ratings yet.`}{' '}
                       </div>
                       <div>
                         Current Critical Assessment:{' '}
-                        {averageCriticalAssessmentScore(userImage)}
+                        {averageCriticalAssessmentScore(userImage).toFixed(1)}
                       </div>
                       <div
                         style={{
@@ -197,7 +197,7 @@ export default function GalleryUserView({
                       >
                         Instructor feedback:
                       </div>
-                      <div>{!userImage.feedback && `None at this time.`}</div>
+                      <div>{userImage?.feedback || `None at this time.`}</div>
                     </div>
                   </div>
                 )}

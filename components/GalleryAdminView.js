@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { TwitterPicker as ColorPicker } from 'react-color'
 import Button from '@mui/material/Button'
 import useGalleryApi from 'lib/hooks/useGalleryApi'
+import { generateCSV } from 'lib/downloadCSV'
 
 function GalleryAdminView({
   gallery,
@@ -82,8 +83,20 @@ function GalleryAdminView({
         Delete Gallery
       </Button>
 
-      <Button onClick={activateDeadline} style={{ float: `right` }}>
+      <Button
+        variant="contained"
+        onClick={activateDeadline}
+        style={{ float: `right`, marginLeft: `1rem` }}
+      >
         Activate Deadline
+      </Button>
+
+      <Button
+        variant="contained"
+        onClick={() => generateCSV(gallery.images)}
+        style={{ float: `right` }}
+      >
+        Export CSV
       </Button>
     </div>
   )

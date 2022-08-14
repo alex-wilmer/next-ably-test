@@ -7,6 +7,7 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import averageCriticalAssessmentScore from 'lib/averageCriticalAssessmentScore'
 import { formatDistance } from 'date-fns'
+import { sortBy } from 'lodash'
 
 export default function ResultsTable({ images, getOwnerRating, viewImage }) {
   return (
@@ -26,7 +27,7 @@ export default function ResultsTable({ images, getOwnerRating, viewImage }) {
         </TableHead>
 
         <TableBody>
-          {images.map((image, i) => (
+          {sortBy(images, 'username').map((image, i) => (
             <TableRow
               key={i}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -55,7 +56,7 @@ export default function ResultsTable({ images, getOwnerRating, viewImage }) {
                 {image.raters.length}
               </TableCell>
               <TableCell component="th" scope="row">
-                {image.averageRating}
+                {image.averageRating.toFixed(1)}
               </TableCell>
               <TableCell component="th" scope="row">
                 {getOwnerRating(image)}
@@ -64,7 +65,7 @@ export default function ResultsTable({ images, getOwnerRating, viewImage }) {
                 {image.imagesToRate.filter((x) => x.rating).length}
               </TableCell>
               <TableCell component="th" scope="row">
-                {averageCriticalAssessmentScore(image)}
+                {averageCriticalAssessmentScore(image).toFixed(1)}
               </TableCell>
             </TableRow>
           ))}
