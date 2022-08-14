@@ -62,7 +62,7 @@ export default function NewGalleryForm() {
           <hr />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateTimePicker
-              label="Date&Time picker"
+              label="Submission Deadline"
               value={deadline}
               onChange={(date) => {
                 setDeadline(date)
