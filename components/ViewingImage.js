@@ -3,6 +3,12 @@ import YouTube from 'react-youtube'
 import StarRating from './StarRating'
 import Dialog from '@mui/material/Dialog'
 
+// TODO: pass existing feedback first as default
+// TODO: youtube videos need thumbnail
+// TODO: missing instructor feedback
+// TODO: one decimal place average rating
+// TODO: sort by username
+
 export default function ViewImage({
   asAdmin,
   message,

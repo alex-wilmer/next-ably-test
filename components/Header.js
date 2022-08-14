@@ -35,7 +35,7 @@ function Header({ color }) {
           <a
             style={{
               marginLeft: `1rem`,
-              color: `#f0ff3e`,
+              color: `white`,
             }}
           >
             USERLIST
