@@ -42,7 +42,6 @@ export default async function handler(req, res) {
 
       gallery.save((err, g) => {
         console.log(`Updated Gallery`, g)
-        // io.emit(`api:updateGallery`, g)
         res.status(200).json({ image })
       })
     }

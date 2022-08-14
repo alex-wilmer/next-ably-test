@@ -12,7 +12,6 @@ export default async function handler(req, res) {
       gallery.public = !gallery.public
 
       gallery.save((err, gallery) => {
-        // io.emit(`api:updateGallery`, gallery)
         res.status(200).json(gallery)
       })
     }

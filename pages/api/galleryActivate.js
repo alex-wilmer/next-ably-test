@@ -16,7 +16,6 @@ export default async function handler(req, res) {
 
       gallery.save((err, gallery) => {
         console.log(`deadline activated: ${gallery.submitDeadline}`)
-        // io.emit(`api:updateGallery`, gallery)
         res.status(200).json({ gallery })
       })
 
