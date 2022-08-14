@@ -64,7 +64,7 @@ export default function ResultsTable({ images, getOwnerRating, viewImage }) {
                 {image.imagesToRate.filter((x) => x.rating).length}
               </TableCell>
               <TableCell component="th" scope="row">
-                {averageCriticalAssessmentScore(image) || 0}
+                {averageCriticalAssessmentScore(image)}
               </TableCell>
             </TableRow>
           ))}
