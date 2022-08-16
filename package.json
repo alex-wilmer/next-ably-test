@@ -1,9 +1,10 @@
 {
-  "name": "rater-next",
+  "name": "rater",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "e2e": "cypress open",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -26,6 +27,7 @@
     "react-youtube": "^9.0.3"
   },
   "devDependencies": {
+    "cypress": "^10.5.0",
     "eslint": "8.21.0",
     "eslint-config-next": "12.2.3",
     "prettier": "2.7.1"

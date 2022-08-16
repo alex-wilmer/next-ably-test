@@ -35,6 +35,7 @@ export default function Home() {
         }}
       >
         <Box
+          data-cy="rater-logo"
           sx={{
             color: 'rgba(255, 255, 255, 0.8)',
             fontSize: '42px',
@@ -48,6 +49,7 @@ export default function Home() {
       </Box>
       <Link href="/login">
         <Button
+          data-cy="get-started-btn"
           variant="text"
           sx={{
             transform: 'translateY(-50px)',

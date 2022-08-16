@@ -40,6 +40,7 @@ export default function Login() {
           }}
         >
           <TextField
+            data-cy="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             id="outlined-basic"
@@ -71,6 +72,7 @@ export default function Login() {
             />
           </div>
           <Button
+            data-cy="login-btn"
             onClick={async () => {
               if (password.length !== 4) {
                 setMessage('Please enter a 4 digit pin.')

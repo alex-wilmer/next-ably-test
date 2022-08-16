@@ -56,6 +56,7 @@ export default function Galleries() {
         {admin && (
           <Link href="/new-gallery">
             <a
+              data-cy="new-gallery-btn"
               style={{
                 width: `15rem`,
                 height: `7rem`,

@@ -27,10 +27,16 @@ MONGODB_URI=
 IMGUR_CLIENT_ID=
 ```
 
-Eun the development server:
+Run the development server:
 
 ```bash
 yarn dev
+```
+
+Run end to end tests:
+
+```bash
+yarn e2e
 ```
 
 > Note: Imgur blocks localhost visit the app at 0.0.0.0 to bypass the Imgur block
