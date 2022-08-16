@@ -11,7 +11,7 @@ import { sortBy } from 'lodash'
 
 export default function ResultsTable({ images, getOwnerRating, viewImage }) {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer data-cy="results-table" component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>

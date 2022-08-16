@@ -44,6 +44,7 @@ export default function NewGalleryForm() {
         >
           <h2>New Gallery:</h2>
           <TextField
+            data-cy="gallery-name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             id="outlined-basic"
@@ -52,6 +53,7 @@ export default function NewGalleryForm() {
             sx={{ mb: '0.3rem' }}
           />
           <TextField
+            data-cy="gallery-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             id="outlined-basic"
@@ -76,6 +78,7 @@ export default function NewGalleryForm() {
             }}
           >
             <Button
+              data-cy="create-gallery-btn"
               style={{
                 width: `100%`,
                 marginBottom: `1rem`,

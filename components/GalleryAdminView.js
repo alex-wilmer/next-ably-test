@@ -72,6 +72,7 @@ function GalleryAdminView({
       </div>
 
       <Button
+        data-cy="open-delete-modal-btn"
         onClick={openDeleteModal}
         style={{
           float: `right`,
