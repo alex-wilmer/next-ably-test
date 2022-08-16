@@ -77,6 +77,7 @@ export default function Galleries() {
         {sortBy(galleries, 'name').map((g) => (
           <Link href={`/gallery/${g._id}`} key={g._id}>
             <a
+              data-cy={`go-to-gallery-btn-${g.name}`}
               style={{
                 width: `15rem`,
                 height: `7rem`,

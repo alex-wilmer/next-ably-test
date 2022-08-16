@@ -158,6 +158,7 @@ export default function Gallery() {
         <Box sx={{ mb: '1rem' }}>
           <Link href="/galleries">
             <a
+              data-cy="back-to-galleries-link"
               style={{
                 color: `black`,
                 fontSize: `1.4em`,
