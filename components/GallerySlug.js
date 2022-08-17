@@ -91,7 +91,7 @@ export default function Gallery() {
     let response = await fetch(`https://api.imgur.com/3/image`, {
       method: `POST`,
       headers: {
-        Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`,
+        Authorization: `Client-ID a1f8ff831c67e9b`,
         Accept: `application/json`,
         'Content-Type': `application/json`,
       },
