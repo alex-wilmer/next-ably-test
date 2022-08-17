@@ -29,6 +29,7 @@ export default function GalleriesTable({ galleries }) {
             <Link href={`/gallery/${gallery._id}`} key={gallery._id}>
               <TableRow
                 key={gallery._id}
+                data-cy={`go-to-gallery-btn-${gallery.name}`}
                 sx={{
                   '&:hover': {
                     cursor: 'pointer',
