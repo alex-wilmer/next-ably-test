@@ -11,7 +11,7 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action
+        uses: cypress-io/github-action@v4
         runL: touch .env.local
           echo ABLY_API_KEY=${{ secrets.ABLY_API_KEY }} >> .env.local
           echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env.local
