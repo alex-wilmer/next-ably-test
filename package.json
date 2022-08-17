@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "e2e": "cypress open",
+    "e2e:run": "cypress run",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

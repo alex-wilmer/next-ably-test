@@ -36,5 +36,5 @@ Cypress.Commands.add('openGallery', (name) => {
 })
 
 Cypress.Commands.add('goBackToGalleryList', () => {
-  cy.get(`[data-cy="back-to-galleries-link""]`).click()
+  cy.get(`[data-cy="back-to-galleries-link"]`).click()
 })
