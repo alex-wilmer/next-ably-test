@@ -1,4 +1,4 @@
-# to use orbs, must use version >= 2.1
+# to use orbs, use version >= 2.1
 version: 2.1
 orbs:
   # import Cypress orb by specifying an exact version x.y.z
