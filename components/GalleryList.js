@@ -3,8 +3,9 @@ import Head from 'next/head'
 import Header from 'components/Header'
 import Link from 'next/link'
 import useGalleryApi from 'lib/hooks/useGalleryApi'
-import { sortBy } from 'lodash'
 import useChannel from 'lib/hooks/useChannel'
+import GalleriesTable from './GalleriesTable'
+import { Container, Button } from '@mui/material'
 
 export default function Galleries() {
   const { getGalleries } = useGalleryApi()
@@ -47,52 +48,23 @@ export default function Galleries() {
 
       <Header />
 
-      <div
-        style={{
-          display: `flex`,
-          flexWrap: `wrap`,
-        }}
-      >
-        {admin && (
-          <Link href="/new-gallery">
-            <a
-              data-cy="new-gallery-btn"
-              style={{
-                width: `15rem`,
-                height: `7rem`,
-                border: `2px solid rgb(59, 150, 80)`,
-                display: `flex`,
-                flexDirection: `column`,
-                justifyContent: `center`,
-                alignItems: `center`,
-                margin: `1rem`,
-              }}
-            >
-              <div>+</div>
-              <div>New Gallery</div>
-            </a>
-          </Link>
-        )}
-
-        {sortBy(galleries, 'name').map((g) => (
-          <Link href={`/gallery/${g._id}`} key={g._id}>
-            <a
-              data-cy={`go-to-gallery-btn-${g.name}`}
-              style={{
-                width: `15rem`,
-                height: `7rem`,
-                border: `2px solid ${g.color || `rgb(27, 173, 112)`}`,
-                display: `flex`,
-                justifyContent: `center`,
-                alignItems: `center`,
-                margin: `1rem`,
-              }}
-            >
-              {g.name}
-            </a>
-          </Link>
-        ))}
-      </div>
+      <Container sx={{ pt: '1rem' }}>
+        <div
+          style={{
+            display: `flex`,
+            flexWrap: `wrap`,
+          }}
+        >
+          {admin && (
+            <Link href="/new-gallery">
+              <Button variant="contained" data-cy="new-gallery-btn">
+                <div>New Gallery</div>
+              </Button>
+            </Link>
+          )}
+          <GalleriesTable galleries={galleries} />
+        </div>
+      </Container>
     </div>
   )
 }
