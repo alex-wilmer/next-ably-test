@@ -5,8 +5,6 @@ const GALLERY_PASSWORD = 'test-password'
 
 // todo: e2e command should start server if not running
 // todo: github action
-// todo: delete gallery btn from list page
-// todo: make gallery list a table?
 // todo: delete users
 // todo: user table
 // todo: cypress mongo uri
