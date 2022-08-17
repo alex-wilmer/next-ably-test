@@ -149,7 +149,7 @@ export default function Gallery() {
       <Dialog open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
         <DialogTitle>Do you really want to delete this gallery?</DialogTitle>
         <Button onClick={() => setDeleteModalOpen(false)}>Cancel</Button>
-        <Button data-cy="delete-gallery-btn" onClick={deleteGallery}>
+        <Button data-cy="delete-gallery-btn" onClick={() => deleteGallery()}>
           delete
         </Button>
       </Dialog>

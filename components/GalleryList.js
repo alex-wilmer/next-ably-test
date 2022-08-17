@@ -8,17 +8,12 @@ import GalleriesTable from './GalleriesTable'
 import { Container, Button } from '@mui/material'
 
 export default function Galleries() {
-  const { getGalleries } = useGalleryApi()
-  const [galleries, setGalleries] = useState([])
+  const { getGalleries, deleteGallery, galleries } = useGalleryApi()
   const [admin, setAdmin] = useState(false)
 
   useEffect(() => {
     async function req() {
-      const response = await getGalleries()
-      // todo: response could be error with no token provided message
-      // handle all auth errors somewhere
-      if (response) setGalleries(response)
-
+      getGalleries()
       setAdmin(localStorage.admin === 'true')
     }
 
@@ -62,7 +57,11 @@ export default function Galleries() {
               </Button>
             </Link>
           )}
-          <GalleriesTable galleries={galleries} />
+          <GalleriesTable
+            galleries={galleries}
+            isAdmin={admin}
+            deleteGallery={deleteGallery}
+          />
         </div>
       </Container>
     </div>
