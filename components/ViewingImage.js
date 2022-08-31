@@ -25,7 +25,13 @@ export default function ViewImage({
   }
 
   return (
-    <Dialog open={!!viewingImage} onClose={close}>
+    <Dialog
+      open={!!viewingImage}
+      onClose={() => {
+        setFeedback('')
+        close()
+      }}
+    >
       <div
         style={{
           minWidth: `400px`,
