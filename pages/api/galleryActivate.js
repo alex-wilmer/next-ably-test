@@ -1,12 +1,12 @@
-import mongoose from 'mongoose'
 import Gallery from 'lib/models/gallery'
 import verifyToken from 'lib/middleware/verifyToken'
 import runMiddleware from 'lib/middleware/runMiddleware'
 import activateDeadline from 'lib/activateDeadline'
+import connect from 'lib/middleware/connectToDb'
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, verifyToken)
-  mongoose.connect(process.env.MONGODB_URI)
+  await connect()
 
   Gallery.findOne({ _id: req.body.galleryId }, (err, gallery) => {
     if (gallery && gallery.owner === req.body.username) {

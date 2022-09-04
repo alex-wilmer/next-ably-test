@@ -1,11 +1,11 @@
 import User from 'lib/models/user'
 import crypto from 'crypto'
-import mongoose from 'mongoose'
+import connect from 'lib/middleware/connectToDb'
 
 const SECRET = 'wubbalubbadubdub'
 
-export default function handler(req, res) {
-  mongoose.connect(process.env.MONGODB_URI)
+export default async function handler(req, res) {
+  await connect()
 
   let { username, password } = req.body
 
