@@ -175,7 +175,10 @@ export default function Gallery() {
               close={() => setViewingImage(null)}
               asAdmin={gallery.owner === localStorage.username}
               // message={this.state.message}
-              rate={rate}
+              rate={(v) => {
+                rate(v)
+                setViewingImage(null)
+              }}
               viewingImage={viewingImage}
               viewImage={viewImage}
             />

@@ -45,7 +45,7 @@ export default function Home() {
         >
           RATER
         </Box>
-        <StarRating rate={() => {}} />
+        <StarRating rate={() => {}} showSubmit={false} />
       </Box>
       <Link href="/login">
         <Button
