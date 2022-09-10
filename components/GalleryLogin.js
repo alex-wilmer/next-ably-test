@@ -27,7 +27,14 @@ export default function GalleryLogin({
         <TextField
           value={galleryPassword}
           type="password"
-          onChange={(e) => setGalleryPassword(e.target.value)}
+          onChange={(e) => {
+            setGalleryPassword(e.target.value)
+          }}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              getGallery({ password: galleryPassword })
+            }
+          }}
           id="outlined-basic"
           label="Password"
           variant="outlined"
