@@ -1,4 +1,4 @@
-import Gallery from 'lib/models/gallery'
+import { omit } from 'lodash'
 import verifyToken from 'lib/middleware/verifyToken'
 import runMiddleware from 'lib/middleware/runMiddleware'
 import calculateCriticalAssessmentScores from 'lib/calculateCriticalAssessmentScores'
@@ -6,9 +6,17 @@ import connect from 'lib/middleware/connectToDb'
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, verifyToken)
-  await connect()
+  const db = connect()
 
-  Gallery.findOne({ _id: req.body.galleryId }, (err, gallery) => {
+  db.findOne({
+    collection: 'galleries',
+    filter: {
+      _id: {
+        $oid: req.body.galleryId,
+      },
+    },
+  }).then((result) => {
+    let gallery = result.document
     if (gallery) {
       let image = gallery.images.filter(
         (x) => x.link === req.body.viewingImage.link
@@ -109,9 +117,15 @@ export default async function handler(req, res) {
         }
       }
 
-      gallery.markModified(`images`)
-
-      gallery.save((err, gallery) => {
+      db.updateOne({
+        collection: 'galleries',
+        filter: {
+          _id: {
+            $oid: req.body.galleryId,
+          },
+        },
+        update: omit(gallery, '_id'),
+      }).then(() => {
         console.log(
           `${req.body.username} rated ${req.body.rating} on ${image.link}`
         )

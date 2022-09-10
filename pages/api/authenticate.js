@@ -1,4 +1,3 @@
-import User from 'lib/models/user'
 import crypto from 'crypto'
 import jwt from 'jsonwebtoken'
 import connect from 'lib/middleware/connectToDb'
@@ -6,12 +5,14 @@ import connect from 'lib/middleware/connectToDb'
 const SECRET = 'wubbalubbadubdub'
 
 export default async function handler(req, res) {
-  await connect()
-
+  const db = connect()
   let { username, password } = req.body
 
-  User.findOne({ username }, (err, user) => {
-    if (err) throw err
+  db.findOne({
+    collection: 'users',
+    filter: { username },
+  }).then((result) => {
+    const user = result.document
 
     if (!user) {
       res.status(400).json({ success: false, message: 'User not found.' })

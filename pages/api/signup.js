@@ -1,34 +1,39 @@
-import User from 'lib/models/user'
 import crypto from 'crypto'
 import connect from 'lib/middleware/connectToDb'
 
 const SECRET = 'wubbalubbadubdub'
 
 export default async function handler(req, res) {
-  await connect()
+  const db = connect()
 
   let { username, password } = req.body
 
   if (username && password) {
-    User.findOne({ username }, (err, user) => {
-      if (err) throw err
-      if (user)
+    db.findOne({
+      collection: 'users',
+      filter: { username },
+    }).then((result) => {
+      const user = result.document
+
+      if (user) {
         res.status(400).json({
           success: false,
           message: `User with this username already exists.`,
         })
-      else {
+      } else {
         const hash = crypto
           .createHmac('sha256', SECRET)
           .update(password)
           .digest('hex')
 
-        let user = new User({ username, password: hash })
+        let document = { username, password: hash }
 
-        if (username === `admin`) user.admin = true
+        if (username === `admin`) document.admin = true
 
-        user.save((err) => {
-          if (err) throw err
+        db.insertOne({
+          collection: 'users',
+          document,
+        }).then(() => {
           res.status(200).json({ success: true })
         })
       }

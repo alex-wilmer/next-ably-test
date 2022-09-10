@@ -1,24 +1,30 @@
-import Gallery from 'lib/models/gallery'
 import verifyToken from 'lib/middleware/verifyToken'
 import runMiddleware from 'lib/middleware/runMiddleware'
 import connect from 'lib/middleware/connectToDb'
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, verifyToken)
-  await connect()
+  const db = connect()
 
   let { owner, name, password, submitDeadline } = req.body
 
   if (name && password) {
-    Gallery.findOne({ name }, (err, gallery) => {
-      if (err) throw err
+    db.findOne({
+      collection: 'galleries',
+      filter: {
+        _id: {
+          $oid: req.body.galleryId,
+        },
+      },
+    }).then((result) => {
+      const gallery = result.document
 
       if (gallery) {
         res
           .status(400)
           .json({ error: `Gallery with this name already exists.` })
       } else {
-        let gallery = new Gallery({
+        let document = {
           name,
           password,
           submitDeadline,
@@ -28,14 +34,15 @@ export default async function handler(req, res) {
           passedDeadline: false,
           createdDate: +new Date(),
           images: [],
-        })
+        }
 
-        gallery.save((err, g) => {
-          if (err) throw err
-
+        db.insertOne({
+          collection: 'galleries',
+          document,
+        }).then((result) => {
           res.status(200).json({
             success: true,
-            galleryId: g._id,
+            galleryId: result.insertedId,
           })
         })
       }
