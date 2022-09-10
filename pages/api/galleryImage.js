@@ -27,8 +27,23 @@ export default async function handler(req, res) {
         image.width = req.body.width
         image.height = req.body.height
         image.uploadDate = +new Date()
+
+        db.updateOne({
+          collection: 'galleries',
+          filter: {
+            _id: {
+              $oid: req.body.galleryId,
+            },
+            'images.username': req.body.username,
+          },
+          update: {
+            $set: { 'images.$': image },
+          },
+        }).then(() => {
+          res.status(200).json({ image })
+        })
       } else {
-        image = {
+        const document = {
           link: req.body.link,
           width: req.body.width,
           height: req.body.height,
@@ -39,25 +54,21 @@ export default async function handler(req, res) {
           averageRating: 0,
           uploadDate: +new Date(),
         }
-      }
 
-      gallery.images = [
-        ...gallery.images.filter((x) => x.username !== req.body.username),
-        image,
-      ]
-
-      db.updateOne({
-        collection: 'galleries',
-        filter: {
-          _id: {
-            $oid: req.body.galleryId,
+        db.updateOne({
+          collection: 'galleries',
+          filter: {
+            _id: {
+              $oid: req.body.galleryId,
+            },
           },
-        },
-        update: omit(gallery, '_id'),
-      }).then(() => {
-        console.log(`Updated Gallery`, gallery)
-        res.status(200).json({ image })
-      })
+          update: {
+            $addToSet: { images: document },
+          },
+        }).then(() => {
+          res.status(200).json({ image: document })
+        })
+      }
     }
   })
 }
