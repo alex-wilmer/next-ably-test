@@ -124,6 +124,7 @@ export default async function handler(req, res) {
             $oid: req.body.galleryId,
           },
         },
+        // todo - edit just the one image
         update: omit(gallery, '_id'),
       }).then(() => {
         console.log(

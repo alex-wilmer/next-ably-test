@@ -30,6 +30,8 @@ function GalleryAdminView({
         </Button>
       </div>
 
+      <div>Deadline Activated: {gallery.passedDeadline ? 'Yes' : 'No'}</div>
+
       <div
         style={{
           display: `flex`,
