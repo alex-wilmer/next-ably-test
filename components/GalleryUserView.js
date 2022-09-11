@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import YouTube from 'react-youtube'
 import { Button, TextField } from '@mui/material'
 import ImagesToRate from './ImagesToRate'
 import UploadImage from './UploadImage'
 import ShareYoutube from './ShareYoutube'
 import averageCriticalAssessmentScore from 'lib/averageCriticalAssessmentScore'
+import YourImage from './YourImage'
 
 export default function GalleryUserView({
   clearDataUrl,
@@ -23,14 +23,6 @@ export default function GalleryUserView({
 }) {
   const [youtube, setYoutube] = useState('')
 
-  const opts = {
-    height: '390',
-    width: '640',
-    playerVars: {
-      autoplay: 0,
-    },
-  }
-
   return (
     <div>
       {!gallery.passedDeadline && (
@@ -44,56 +36,17 @@ export default function GalleryUserView({
             padding: `3rem`,
           }}
         >
-          {!!userImage &&
-            !dataUrl && ( // user has submitted
-              <div>
-                <div>
-                  {userImage.link?.includes(`youtu`) && (
-                    <YouTube
-                      videoId={userImage.link.split('/').pop()}
-                      opts={opts}
-                    />
-                  )}
-                  {!userImage.link?.includes(`youtu`) && (
-                    <img // eslint-disable-line
-                      alt="userImage"
-                      src={userImage.link}
-                      style={{
-                        maxWidth: `40rem`,
-                      }}
-                    />
-                  )}
-                </div>
-                {!!userImage.width && (
-                  <div
-                    style={{
-                      marginTop: `1rem`,
-                    }}
-                  >
-                    {userImage.width}px - {userImage.height}px
-                  </div>
-                )}
-                {!!userImage.caption && (
-                  <div
-                    style={{
-                      marginTop: `1rem`,
-                      fontSize: `1.2rem`,
-                    }}
-                  >
-                    {userImage.caption}
-                  </div>
-                )}
-                <div
-                  style={{
-                    marginTop: `1rem`,
-                    fontSize: `1.3rem`,
-                  }}
-                >
-                  Thank you! You may submit a different image until the
-                  deadline.
-                </div>
-              </div>
-            )}
+          <YourImage userImage={userImage} dataUrl={dataUrl} />
+
+          <div
+            style={{
+              marginTop: `1rem`,
+              fontSize: `1.3rem`,
+            }}
+          >
+            Thank you! You may submit a different image until the deadline.
+          </div>
+
           {!!link || (
             <UploadImage
               clearDataUrl={clearDataUrl}
@@ -140,12 +93,12 @@ export default function GalleryUserView({
               {!userImage.imagesToRate.length && (
                 <div
                   style={{
-                    height: `10rem`,
                     display: `flex`,
                     flexDirection: `column`,
                     justifyContent: `center`,
                     alignItems: `center`,
                     fontSize: `1.3rem`,
+                    paddingBottom: '4rem',
                   }}
                 >
                   <div
@@ -162,12 +115,12 @@ export default function GalleryUserView({
                 userImage.imagesToRate.every((x) => x.rating) && (
                   <div
                     style={{
-                      height: `10rem`,
                       display: `flex`,
                       flexDirection: `column`,
                       justifyContent: `center`,
                       alignItems: `center`,
                       fontSize: `1.3rem`,
+                      paddingBottom: '4rem',
                     }}
                   >
                     <div
@@ -201,7 +154,19 @@ export default function GalleryUserView({
                     </div>
                   </div>
                 )}
-              {userImage.imagesToRate.every((x) => x.rating) || (
+              {userImage.imagesToRate.every((x) => x.rating) && (
+                <div
+                  style={{
+                    display: `flex`,
+                    flexDirection: `column`,
+                    justifyContent: `center`,
+                    alignItems: `center`,
+                  }}
+                >
+                  <YourImage userImage={userImage} dataUrl={dataUrl} />
+                </div>
+              )}
+              {!userImage.imagesToRate.every((x) => x.rating) && (
                 <ImagesToRate userImage={userImage} viewImage={viewImage} />
               )}
             </div>
