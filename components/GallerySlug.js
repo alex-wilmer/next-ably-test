@@ -113,8 +113,6 @@ export default function Gallery() {
         caption,
       })
     }
-
-    // this.setState({ loading: false })
   }
 
   function viewImage({ image }) {

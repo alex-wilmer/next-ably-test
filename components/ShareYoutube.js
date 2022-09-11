@@ -41,7 +41,10 @@ function ShareYoutube({ youtubeLink, saveToDb, clearYoutubelink }) {
         <Box>
           <Button onClick={clearYoutubelink}>Cancel</Button>
           <Button
-            onClick={() => saveToDb({ link: youtubeLink, caption })}
+            onClick={() => {
+              saveToDb({ link: youtubeLink, caption })
+              clearYoutubelink()
+            }}
             style={{
               marginLeft: `3rem`,
             }}
