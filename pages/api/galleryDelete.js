@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   await runMiddleware(req, res, verifyToken)
   const db = connect()
 
-  db.findOne({
+  db.deleteOne({
     collection: 'galleries',
     filter: {
       _id: {
