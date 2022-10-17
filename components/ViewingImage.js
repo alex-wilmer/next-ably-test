@@ -26,6 +26,7 @@ export default function ViewImage({
 
   return (
     <Dialog
+      maxWidth={false}
       open={!!viewingImage}
       onClose={() => {
         setFeedback('')
